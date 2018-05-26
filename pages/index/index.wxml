@@ -1,0 +1,56 @@
+<!--index.wxml-->
+<swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}" wx:for-index="index">
+    <swiper-item>
+      <image src="{{item.picUrl}}" class="slide-image"/>
+    </swiper-item>
+  </block>
+</swiper>
+
+<view class="section">
+  <navigator url="../cases/index" open-type="switchTab" class="text">
+    <view class="line_flag"></view>
+    <text class="weui-cell__bd title">案例展示</text>
+    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </navigator>
+
+  <view class="scroll-x productions">
+    <view class="scroll-x-H" width="">
+      <view class="scroll-x-item" wx:for="{{productImgUrls}}" wx:for-index="index">
+        <image src="{{item.pic}}" bindtap="showImages" data-classify="productions" data-current="{{index}}" />
+      </view>
+    </view>
+  </view>  
+</view>
+
+<view class="section">
+  <navigator url="../models/index" class="text">
+    <view class="line_flag"></view>
+    <text class="weui-cell__bd title">小样定制</text>
+    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </navigator>
+
+  <view class="row models">
+    <view class="col-6" wx:for="{{modelImgUrls}}" wx:for-index="index">
+      <image src="{{item.pic}}" mode="aspectFill" bindtap="showImages" data-classify="models" data-current="{{index}}" />
+    </view>
+  </view>
+</view>
+
+<view class="section">
+  <navigator url="../productions/index" class="text">
+    <view class="line_flag"></view>
+    <text class="weui-cell__bd title">产品展示</text>
+    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </navigator>
+
+
+  <view class="scroll-x productions">
+    <view class="scroll-x-H" width="">
+      <view class="scroll-x-item" wx:for="{{componentImgUrls}}" wx:for-index="index">
+        <image src="{{item.pic}}" bindtap="showImages" data-classify="components" data-current="{{index}}" />
+      </view>
+    </view>
+  </view>  
+</view>

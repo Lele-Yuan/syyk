@@ -1,0 +1,7 @@
+<view class="row models">
+	<view class="col-6" wx:for="{{imgalist}}" wx:for-index="index">
+	  <image src="{{item.pic}}" mode="aspectFill" bindtap="showImages" data-current="{{index}}" />
+	  <view class="text">{{item.name}}</view>
+	  <view class="local">{{item.characteristic}}</view>
+	</view>
+</view> 

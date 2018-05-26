@@ -1,0 +1,7 @@
+<!--index.wxml-->
+<view class="news-list" wx:for="{{newslist}}">
+  <navigator url="../newsDetail/index?id={{item.id}}" class="news-item">
+    <image src="{{item.pic}}" mode=""></image>
+    <text>{{item.title}}</text>
+  </navigator>
+</view>

@@ -1,0 +1,43 @@
+/**app.wxss**/
+@import 'style/weui.wxss';
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+.flex{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+}
+.flex__item{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	flex: 1;
+}
+.row{
+  overflow: hidden;
+}
+.col-6{
+  float: left;
+  width: 50%;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-sizing: border-box;
+}
+.col-6 image{
+  width: 100%;
+}
+.scroll-x{
+  overflow-x: scroll;
+  height: 113px;
+}
+.scroll-x-H{
+  width: 1000px;
+}
+

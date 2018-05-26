@@ -1,0 +1,15 @@
+/**index.wxss**/
+.col-6 image{
+	height: 150px;
+	display: block;
+}
+.text{
+	font-size: 12px;
+	padding-top: 10px;
+}
+.local{
+	color: #ccc;
+	font-size: 10px;
+	text-align: right;
+	padding-bottom: 10px;
+}

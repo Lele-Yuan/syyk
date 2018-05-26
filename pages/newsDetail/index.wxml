@@ -1,0 +1,8 @@
+<!--index.wxml-->
+<import src="../../wxParse/wxParse.wxml"/>
+<view class="news-detail">
+	<image src="{{newsDetail.pic}}" mode="widthFix"></image>
+	<text class="title">{{newsDetail.title}}</text>
+	<text class="date">{{dateAdd}}</text>
+  <view class="descript"><template is="wxParse" data="{{wxParseData:content.nodes}}"/></view>
+</view>

@@ -1,0 +1,34 @@
+/**index.wxss**/
+.head{
+	text-align: center;
+}
+.head-img{
+	width: 120px;
+	height: 120px;
+	display: block;
+	margin: auto;
+}
+
+.info-list{
+	font-size: 12px;
+	color: #8a8a8a;
+	padding: 40px 20px;
+}
+.info-item{
+	display: flex;
+	padding-top: 20px;
+}
+.info-item .item-icon{
+	width: 20px;
+	height: 20px;
+	vertical-align: top;
+	padding-right: 5px;
+}
+.info-item text{
+	line-height: 20px;
+}
+.weui-cell__ft_in-access{
+	margin:auto;
+	top: 0;
+	bottom:0;
+}

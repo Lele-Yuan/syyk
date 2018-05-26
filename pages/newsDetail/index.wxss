@@ -1,0 +1,30 @@
+/**index.wxss**/
+
+@import '../../wxParse/wxParse.wxss'
+
+.news-detail{
+}
+.news-detail image{
+	width: 100%;
+}
+.news-detail .title{
+	font-size: 20px;
+	font-weight: bold;
+	display: block;
+	padding: 10px 20px 0 20px;
+}
+.news-detail .date{
+	color: #ccc;
+	font-size: 12px;
+	display: block;
+	padding: 0px 20px 15px 20px;
+	border-bottom: 3px solid #ccc;
+	margin-bottom: 20px;
+}
+.news-detail .descript{
+	font-size: 14px;
+	display: block;
+	padding: 0 20px;
+	color: #333;
+	line-height: 22px;
+}

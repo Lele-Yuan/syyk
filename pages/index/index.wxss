@@ -1,0 +1,67 @@
+/**index.wxss**/
+.slide-image{
+	width: 100%;
+	height: 150px;
+}
+.line_flag {
+    width: 3px;
+    height: 100%;
+    height: 15px;
+    display: inline-block;
+    background-color: #c21a29;
+}
+.section .text {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 20px 10px 10px 12px;
+    font-size: 15px;
+    color: #656565;
+}
+.section .text .title {
+	margin-left:10px;
+	line-height:18px;
+	font-weight:bold;
+}
+.scroll-x-item{
+	width: 150px;
+	height: 113px;
+	float: left;
+	margin-right: 10px;
+}
+.scroll-x-item image{
+	width: 100%;
+	height: 100%;
+}
+.more navigator{
+	width: 100%;
+	height: 100%;
+}
+.models{
+	padding: 0 5px;
+}
+.models .col-6{
+  padding: 0px 5px 10px 5px;
+}
+.models image{
+  height: 100px;
+}
+
+
+
+.productions{
+	padding: 0 10px;
+	height: 226px;
+}
+.productions .scroll-x-H{
+	width: 100%;
+}
+.productions .scroll-x-item{
+	margin: 0 0 20px 0;
+	width: 50%;
+}
+.productions .scroll-x-item image{
+	width: 90%;
+	margin: auto;
+	display: block;
+}

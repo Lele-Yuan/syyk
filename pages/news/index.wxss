@@ -1,0 +1,13 @@
+/**index.wxss**/
+.news-list{
+	padding: 10px;
+}
+.news-item image{
+	width: 100%;
+	height: 150px;
+}
+.news-item text{
+	font-size: 16px;
+	display: block;
+	padding: 0 5px;
+}
