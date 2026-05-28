@@ -1,0 +1,31 @@
+<view wx:if="{{visible}}" class="lm-mask">
+  <view class="lm-card">
+    <view class="lm-title">{{title}}</view>
+    <view class="lm-desc">完善以下信息后即可继续</view>
+
+    <!-- 头像 -->
+    <button class="lm-avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+      <image wx:if="{{avatarUrl}}" src="{{avatarUrl}}" class="lm-avatar"/>
+      <view wx:else class="lm-avatar-ph">点击选择头像</view>
+    </button>
+
+    <!-- 昵称 -->
+    <view class="lm-row">
+      <text class="lm-lab">昵称</text>
+      <input class="lm-ipt" type="nickname" value="{{nickName}}"
+             bindinput="onNickInput" bindblur="onNickInput" bindchange="onNickInput"
+             placeholder="请输入昵称"/>
+    </view>
+
+    <!-- 手机号 -->
+    <button wx:if="{{!phoneCode}}" class="lm-phone-btn" open-type="getPhoneNumber" bindgetphonenumber="onGetPhone">
+      📞 获取微信绑定手机号
+    </button>
+    <view wx:else class="lm-phone-done">✓ 手机号已授权</view>
+
+    <button class="lm-btn {{submitting ? 'disabled' : ''}}" disabled="{{submitting}}" bindtap="onSubmit">
+      {{submitting ? '登录中...' : '完成登录'}}
+    </button>
+    <view class="lm-cancel" bindtap="onCancel">暂不登录</view>
+  </view>
+</view>

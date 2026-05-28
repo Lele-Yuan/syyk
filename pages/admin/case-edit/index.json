@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "编辑工程作品",
+  "usingComponents": {
+    "section-title": "/components/section-title/index",
+    "upload-image": "/components/upload-image/index",
+    "kv-editor": "/components/kv-editor/index",
+    "steps-editor": "/components/steps-editor/index"
+  }
+}

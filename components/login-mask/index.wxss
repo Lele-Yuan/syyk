@@ -1,0 +1,73 @@
+.lm-mask {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,32,69,0.55);
+  z-index: 999;
+  display: flex; align-items: center; justify-content: center;
+}
+.lm-card {
+  width: 600rpx;
+  background: #fff;
+  border-radius: 32rpx;
+  padding: 56rpx 40rpx 40rpx;
+  display: flex; flex-direction: column; align-items: center;
+}
+.lm-title {
+  font-size: 36rpx; color: #002045; font-weight: 600;
+}
+.lm-desc {
+  margin-top: 12rpx;
+  font-size: 24rpx; color: #67717E;
+  text-align: center;
+}
+
+.lm-avatar-btn {
+  margin-top: 32rpx;
+  padding: 0; background: transparent; line-height: 1;
+  width: 144rpx; height: 144rpx; border-radius: 50%;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.lm-avatar-btn::after { border: none; }
+.lm-avatar { width: 144rpx; height: 144rpx; border-radius: 50%; }
+.lm-avatar-ph {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22rpx; color: #67717E; padding: 0 12rpx;
+  text-align: center;
+}
+
+.lm-row {
+  width: 100%;
+  margin-top: 32rpx;
+  display: flex; align-items: center;
+  border: 2rpx solid #E0E3E5; border-radius: 16rpx;
+  padding: 0 24rpx;
+}
+.lm-lab { font-size: 26rpx; color: #43474E; margin-right: 16rpx; }
+.lm-ipt { flex: 1; height: 80rpx; font-size: 28rpx; color: #181C1E; }
+
+.lm-phone-btn, .lm-phone-done {
+  width: 100%;
+  margin-top: 24rpx;
+  background: #F1F4F6; color: #002045;
+  border-radius: 16rpx; padding: 24rpx 0;
+  text-align: center; font-size: 28rpx;
+  border: none;
+}
+.lm-phone-btn::after { border: none; }
+.lm-phone-done { color: #1B7F4F; background: #E1F4EA; }
+
+.lm-btn {
+  margin-top: 32rpx;
+  width: 100%;
+  background: #A63B00; color: #fff;
+  border-radius: 16rpx; padding: 24rpx 0;
+  text-align: center; font-size: 30rpx; font-weight: 600;
+  border: none;
+}
+.lm-btn::after { border: none; }
+.lm-btn.disabled { opacity: 0.6; }
+.lm-cancel {
+  margin-top: 20rpx;
+  font-size: 26rpx; color: #67717E;
+}

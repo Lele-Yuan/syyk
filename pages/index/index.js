@@ -1,124 +1,70 @@
-//index.js
-var util = require('../../utils/util.js');
-//获取应用实例
+const { listProducts, listCases, getHomeConfig, HOME_DEFAULT } = require('../../utils/db.js');
+
 Page({
   data: {
-    //banner-轮播配置
-    imgUrls: [
-      /*'/images/index1.jpg',
-      '/images/index2.jpg'*/
+    banners: HOME_DEFAULT.banners.slice(),
+    bannerFallback: '/images/default-cover.png',
+    caseFallback: '/images/default-cover.png',
+    homeTag: HOME_DEFAULT.tag,
+    homeTitle: HOME_DEFAULT.title,
+    homeSubtitle: HOME_DEFAULT.subtitle,
+    bannerIdx: 0,
+    quickEntries: [
+      { icon: '🏛️', label: '数字化展厅', url: '/pages/products/list/index', type: 'tab' },
+      { icon: '🏗️', label: '工程作品', url: '/pages/cases/list/index', type: 'tab' },
+      { icon: '📝', label: '一键询价', url: '/pages/inquiry/index/index', type: 'tab' },
+      { icon: '🏢', label: '关于我们', url: '/pages/about/index', type: 'nav' }
     ],
-    indicatorDots: true,
-    autoplay: false,
-    interval: 5000,
-    duration: 1000,
-
-    // 案例展示
-    productImgUrls: [
-      /*'/images/productions/1.jpg',
-      '/images/productions/2.jpg',
-      '/images/productions/3.jpg',
-      '/images/productions/4.jpg'*/
+    offices: [
+      { city: '沈阳', addr: '沈阳市浑南区火炬路12号' },
+      { city: '大连', addr: '大连市中山区人民路88号' }
     ],
-
-    // 小样定制图片
-    modelImgUrls: [
-      /*'/images/models/1.jpg',
-      '/images/models/2.jpg',
-      '/images/models/3.jpg'*/
-    ],
-
-    // 产品展示
-    componentImgUrls: [
-      /*'/images/components/1.jpg',
-      '/images/components/2.jpg',
-      '/images/components/3.jpg',
-      '/images/components/4.jpg'*/
-    ]
+    cases: [],
+    products: []
   },
-  onLoad: function(){
-    var _this = this;
-
-    /*util.requestFun({
-      url: 'shop/goods/category/all',
-      method: 'post',
-      success: function(res){
-        console.log(res)
-      }
-    })*/
-
-    // 首页banner  type=banner
-    util.requestFun({
-      url: 'banner/list?type=banner',
-      success: function(res){
-        _this.setData({
-          imgUrls : res.data.data
-        })
-      }
-    })
-
-    // 产品列表获取
-    util.requestFun({
-      url: 'shop/goods/list?categoryId=6217&pageSize=6',
-      success: function(res){
-        _this.setData({
-          componentImgUrls : res.data.data
-        })
-      }
-    })
-
-    // 小样儿列表获取
-    util.requestFun({
-      url: 'shop/goods/list?categoryId=6221&pageSize=6',
-      success: function(res){
-        _this.setData({
-          modelImgUrls : res.data.data
-        })
-      }
-    })
-
-    // 案例列表获取
-    util.requestFun({
-      url: 'shop/goods/list?categoryId=6218&pageSize=6',
-      success: function(res){
-        _this.setData({
-          productImgUrls : res.data.data
-        })
-      }
-    })
+  async onShow() {
+    try {
+      const [cfg, cases, products] = await Promise.all([
+        getHomeConfig(),
+        listCases('all'),
+        listProducts()
+      ]);
+      this.setData({
+        banners: (cfg.banners && cfg.banners.length) ? cfg.banners : HOME_DEFAULT.banners.slice(),
+        homeTag: cfg.tag,
+        homeTitle: cfg.title,
+        homeSubtitle: cfg.subtitle,
+        cases: (cases || []).slice(0, 4),
+        products: (products || []).slice(0, 3)
+      });
+    } catch (e) { /* 云未初始化时静默 */ }
   },
-  showImages:function(event){
-    var classify = event.currentTarget.dataset.classify;
-    var index = event.currentTarget.dataset.current;
-    switch(classify){
-      case 'productions':
-        var urls = this.RebuildImgUrl(this.data.productImgUrls, 'pic');
-        wx.previewImage({
-          current: urls[index], // 当前显示图片的http链接
-          urls: urls // 需要预览的图片http链接列表
-        })
-        break;
-      case 'models':
-        var urls = this.RebuildImgUrl(this.data.modelImgUrls, 'pic');
-        wx.previewImage({
-          current: urls[index], // 当前显示图片的http链接
-          urls: urls // 需要预览的图片http链接列表
-        })
-        break;
-      case 'components':
-        var urls = this.RebuildImgUrl(this.data.componentImgUrls, 'pic');
-        wx.previewImage({
-          current: urls[index], // 当前显示图片的http链接
-          urls: urls // 需要预览的图片http链接列表
-        })
-        break;
+  onSwiperChange(e) { this.setData({ bannerIdx: e.detail.current }); },
+  onBannerError(e) {
+    const i = e.currentTarget.dataset.i;
+    const banners = this.data.banners.slice();
+    banners[i] = this.data.bannerFallback;
+    this.setData({ banners });
+  },
+  onCaseImgError(e) {
+    const i = e.currentTarget.dataset.i;
+    const cases = this.data.cases.slice();
+    if (cases[i]) {
+      cases[i] = Object.assign({}, cases[i], { cover: this.data.caseFallback });
+      this.setData({ cases });
     }
   },
-  RebuildImgUrl: function(list, paramName){
-    var imageList = [];
-    for (var i = 0; i < list.length; i++) {
-      imageList[i] = list[i][paramName]
-    }
-    return imageList;
-  }
-})
+  onEntry(e) {
+    const { url, type } = e.currentTarget.dataset;
+    if (type === 'tab') wx.switchTab({ url });
+    else wx.navigateTo({ url });
+  },
+  onCase(e) {
+    wx.navigateTo({ url: '/pages/cases/detail/index?id=' + e.currentTarget.dataset.id });
+  },
+  onFab() {
+    wx.switchTab({ url: '/pages/inquiry/index/index' });
+  },
+  onCallSy() { wx.makePhoneCall({ phoneNumber: '02488886666', fail() {} }); }
+});
+

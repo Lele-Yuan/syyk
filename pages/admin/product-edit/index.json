@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "编辑铝型材",
+  "usingComponents": {
+    "section-title": "/components/section-title/index",
+    "upload-image": "/components/upload-image/index",
+    "kv-editor": "/components/kv-editor/index"
+  }
+}

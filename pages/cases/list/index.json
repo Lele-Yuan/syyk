@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "工程作品",
+  "usingComponents": {
+    "section-title": "/components/section-title/index",
+    "case-card": "/components/case-card/index"
+  }
+}

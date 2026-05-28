@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "咨询询价",
+  "usingComponents": {
+    "section-title": "/components/section-title/index",
+    "login-mask": "/components/login-mask/index"
+  }
+}

@@ -1,0 +1,29 @@
+<view class="ccard" bindtap="onTap">
+  <view class="cover">
+    <image src="{{coverSrc}}" mode="aspectFill" class="img" binderror="onImgError"/>
+    <view class="badges">
+      <view wx:if="{{item.badge}}" class="b1">{{item.badge}}</view>
+      <view wx:if="{{item.tag}}" class="b2">★ {{item.tag}}</view>
+    </view>
+    <view wx:if="{{showAdmin}}" class="admin-ops" catchtap="noop">
+      <view class="op-btn" catchtap="onEdit">编辑</view>
+      <view class="op-btn op-del" catchtap="onDelete">删除</view>
+    </view>
+  </view>
+  <view class="body">
+    <view class="row">
+      <view class="info">
+        <view class="loc">{{item.location || '沈阳'}}</view>
+        <view class="title">{{item.title}}</view>
+      </view>
+      <view class="area">
+        <view class="lab">AREA</view>
+        <view class="val">{{item.area || '—'}}</view>
+      </view>
+    </view>
+    <view wx:if="{{item.tags && item.tags.length}}" class="tags">
+      <view wx:for="{{item.tags}}" wx:key="*this" class="tag-soft">{{item}}</view>
+    </view>
+    <view wx:if="{{item.summary}}" class="sum">{{item.summary}}</view>
+  </view>
+</view>

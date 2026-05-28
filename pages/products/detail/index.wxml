@@ -1,0 +1,78 @@
+<view class="prd-detail" wx:if="{{product}}">
+  <!-- 头图轮播 -->
+  <view class="hero">
+    <swiper class="sw" autoplay circular indicator-dots="{{false}}" bindchange="onSwiperChange">
+      <swiper-item wx:for="{{product.gallery && product.gallery.length ? product.gallery : [product.cover]}}" wx:key="*this">
+        <image src="{{item}}" mode="aspectFill" class="h-img"/>
+      </swiper-item>
+    </swiper>
+    <view wx:if="{{product.series}}" class="h-tag">{{product.series}}</view>
+    <view class="h-dots">
+      <view wx:for="{{product.gallery && product.gallery.length ? product.gallery : [1]}}" wx:key="*this"
+            class="d {{galleryIdx === index ? 'on' : ''}}"></view>
+    </view>
+  </view>
+
+  <view class="page-wrap">
+    <!-- 标题描述 -->
+    <view class="title">{{product.title}}</view>
+    <view wx:if="{{product.description}}" class="desc">{{product.description}}</view>
+
+    <!-- 三大卖点 -->
+    <view wx:if="{{product.features && product.features.length}}" class="features">
+      <view wx:for="{{product.features}}" wx:key="title" class="f-card">
+        <view class="f-ic">{{item.icon || '✦'}}</view>
+        <view class="f-title">{{item.title}}</view>
+        <view class="f-desc">{{item.desc}}</view>
+      </view>
+    </view>
+
+    <!-- 技术规格 -->
+    <section-title title="技术规格详情" extra-en="TECHNICAL SPECS"/>
+    <view class="specs">
+      <view class="sp-head">
+        <view class="sp-c1">性能参数</view>
+        <view class="sp-c2">{{product.series || '系列'}}指标</view>
+      </view>
+      <view wx:for="{{product.specs}}" wx:key="label" class="sp-row">
+        <view class="sp-c1">{{item.label}}</view>
+        <view class="sp-c2">{{item.value}}</view>
+      </view>
+      <view wx:if="{{!product.specs || !product.specs.length}}" class="sp-empty">暂无规格数据</view>
+    </view>
+
+    <!-- 参数对比工具 -->
+    <view class="cmp-card">
+      <view class="cmp-title">参数对比工具</view>
+      <view class="cmp-sub">与同系列产品一键对比，找出最适合您的方案</view>
+      <view class="cmp-btn" bindtap="onCompare">开始对比 →</view>
+    </view>
+
+    <!-- 配套案例 -->
+    <section-title title="配套工程案例" extra="查看全部"/>
+    <scroll-view scroll-x class="cs-scroll" enhanced show-scrollbar="{{false}}">
+      <view wx:for="{{relatedCases}}" wx:key="_id" class="cs-item" data-id="{{item._id}}" bindtap="onCase">
+        <image src="{{item.cover}}" mode="aspectFill" class="cs-img"/>
+        <view class="cs-title">{{item.title}}</view>
+        <view class="cs-sub">{{product.series || ''}} · {{item.area || ''}}</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="bb-side">
+      <view class="bb-i" bindtap="onShareTap">
+        <text class="bb-ic">↗</text><text>转发</text>
+      </view>
+      <view class="bb-i" bindtap="onFav">
+        <text class="bb-ic">{{ isFav ? '★' : '☆' }}</text><text>收藏</text>
+      </view>
+    </view>
+    <view class="bb-actions">
+      <view class="bb-out" bindtap="onSample">申请样品</view>
+      <view class="bb-pri" bindtap="onInquiry">一键询价</view>
+    </view>
+  </view>
+</view>
+<view wx:else class="empty-state">加载中…</view>

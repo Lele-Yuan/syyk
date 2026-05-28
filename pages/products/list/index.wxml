@@ -1,0 +1,53 @@
+<view class="prd-list">
+  <!-- Banner -->
+  <view class="hero">
+    <image src="/images/default-cover.png" mode="aspectFill" class="hero-img"/>
+    <view class="hero-tag">100系列 极致全景</view>
+  </view>
+
+  <view class="page-wrap">
+    <view class="title">数字化展厅</view>
+    <view class="subtitle">探索领先的工业级隔断铝型材与空间系统</view>
+
+    <!-- 筛选 -->
+    <view class="filter-card" bindtap="toggleFilter">
+      <view class="row">
+        <view class="ic">⚙️</view>
+        <view class="lab">智能筛选</view>
+        <view class="arrow">{{showFilter ? '▲' : '▼'}}</view>
+      </view>
+      <view wx:if="{{showFilter}}" class="filter-body" catchtap="noop">
+        <view class="f-row">
+          <view class="f-lab">材质</view>
+          <picker data-k="material" range="{{materialOpts}}" bindchange="onFilter">
+            <view class="f-val">{{filters.material || '全部'}}</view>
+          </picker>
+        </view>
+        <view class="f-row">
+          <view class="f-lab">防火等级</view>
+          <picker data-k="fireRating" range="{{fireOpts}}" bindchange="onFilter">
+            <view class="f-val">{{filters.fireRating || '全部'}}</view>
+          </picker>
+        </view>
+        <view class="f-row">
+          <view class="f-lab">表面处理</view>
+          <picker data-k="surface" range="{{surfaceOpts}}" bindchange="onFilter">
+            <view class="f-val">{{filters.surface || '全部'}}</view>
+          </picker>
+        </view>
+        <view class="f-actions">
+          <view class="f-btn f-reset" catchtap="onReset">重置</view>
+          <view class="f-btn f-apply" catchtap="onApply">应用</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="list">
+      <product-card wx:for="{{products}}" wx:key="_id" item="{{item}}"
+                    bind:tap="onCardTap" bind:inquiry="onInquiry"/>
+      <view wx:if="{{!loading && !products.length}}" class="empty-state">暂无产品，等待管理员发布</view>
+    </view>
+  </view>
+
+  <floating-btn icon="⬆" bottom="{{180}}" bindtap="onScrollTop"/>
+</view>

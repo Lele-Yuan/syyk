@@ -1,0 +1,11 @@
+<view class="se-wrap">
+  <view wx:for="{{items}}" wx:key="index" class="se-row">
+    <view class="se-num">{{index + 1}}</view>
+    <view class="se-fields">
+      <input placeholder="步骤标题" value="{{item.title}}" data-i="{{index}}" data-k="title" bindinput="onInput" class="se-i"/>
+      <textarea placeholder="步骤描述" value="{{item.desc}}" data-i="{{index}}" data-k="desc" bindinput="onInput" class="se-t" auto-height/>
+    </view>
+    <view class="se-rm" data-i="{{index}}" bindtap="onRemove">×</view>
+  </view>
+  <view class="se-add" bindtap="onAdd">+ 添加步骤</view>
+</view>

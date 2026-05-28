@@ -1,0 +1,47 @@
+.profile { background: #F1F4F6; min-height: 100vh; }
+.user-card {
+  background: linear-gradient(135deg, #002045, #1A365D);
+  padding: 40rpx;
+  display: flex; align-items: center; gap: 24rpx;
+  color: #fff;
+}
+.avatar { width: 128rpx; height: 128rpx; border-radius: 50%; background: rgba(255,255,255,0.2); }
+.avatar-text {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 56rpx; color: #fff; font-weight: 600;
+}
+.name { font-size: 36rpx; font-weight: 600; }
+.role {
+  display: inline-block; margin-top: 12rpx;
+  padding: 4rpx 16rpx; border-radius: 12rpx;
+  font-size: 22rpx;
+}
+.role-admin { background: #A63B00; color: #fff; }
+.role-user { background: rgba(255,255,255,0.2); color: #fff; }
+
+.group {
+  background: #fff;
+  border-radius: 24rpx;
+  margin-top: 32rpx;
+  overflow: hidden;
+}
+.g-title { padding: 24rpx 32rpx 8rpx; font-size: 26rpx; color: #67717E; }
+.row {
+  display: flex; align-items: center;
+  padding: 28rpx 32rpx;
+  border-top: 2rpx solid #F1F4F6;
+  font-size: 30rpx; color: #181C1E;
+}
+.r-ic { width: 56rpx; font-size: 32rpx; }
+.r-lab { flex: 1; }
+.r-arrow { color: #C4C6CF; font-size: 32rpx; }
+
+.logout {
+  background: #fff;
+  margin-top: 32rpx;
+  padding: 32rpx;
+  text-align: center;
+  color: #d23900;
+  font-size: 30rpx;
+  border-radius: 24rpx;
+}

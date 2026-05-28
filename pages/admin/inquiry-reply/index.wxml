@@ -1,0 +1,40 @@
+<view wx:if="{{item}}" class="reply">
+  <view class="head-card">
+    <view class="title-row">
+      <view class="t">{{item.projectName}}</view>
+      <view class="badge st-{{item.status}}">{{item.statusText}}</view>
+    </view>
+    <view class="time">提交于 {{item.timeText}}</view>
+  </view>
+
+  <section-title title="客户信息"/>
+  <view class="card info">
+    <view class="kv"><text class="k">姓名</text><text class="v">{{item.userName}}</text></view>
+    <view class="kv" bindtap="onCallPhone"><text class="k">电话</text><text class="v link">📞 {{item.phone}}</text></view>
+    <view class="kv"><text class="k">地址</text><text class="v">{{item.address}}</text></view>
+    <view class="kv"><text class="k">面积</text><text class="v">{{item.area}} ㎡</text></view>
+    <view wx:if="{{item.series}}" class="kv"><text class="k">意向系列</text><text class="v">{{item.series}}</text></view>
+    <view wx:if="{{item.remark}}" class="kv v"><text class="k">备注</text><text class="v">{{item.remark}}</text></view>
+  </view>
+
+  <view wx:if="{{item.reply && item.reply.content}}">
+    <section-title title="历史回复"/>
+    <view class="card history">
+      <view class="h-time">{{item.reply.timeText}}</view>
+      <view class="h-content">{{item.reply.content}}</view>
+    </view>
+  </view>
+
+  <section-title title="{{item.reply && item.reply.content ? '更新回复' : '回复客户'}}"/>
+  <view class="card">
+    <textarea class="ta" value="{{replyText}}" bindinput="onReplyInput"
+              placeholder="请输入回复内容，可包含报价信息、方案建议等..." auto-height/>
+  </view>
+
+  <view class="footer">
+    <button wx:if="{{item.status !== 'closed'}}" class="btn-close" bindtap="onClose">关闭工单</button>
+    <button class="btn-send {{submitting ? 'disabled' : ''}}" disabled="{{submitting}}" bindtap="onSendReply">
+      {{submitting ? '发送中...' : '发送回复'}}
+    </button>
+  </view>
+</view>

@@ -1,0 +1,78 @@
+<view class="edit">
+  <section-title title="基本信息"/>
+  <view class="card">
+    <view class="row">
+      <text class="lab">标题 *</text>
+      <input class="ipt" data-k="title" value="{{form.title}}" bindinput="onInput" placeholder="如：YK-9000 系列工业级隔断"/>
+    </view>
+    <view class="row">
+      <text class="lab">系列</text>
+      <input class="ipt" data-k="series" value="{{form.series}}" bindinput="onInput" placeholder="如：旗舰系列"/>
+    </view>
+    <view class="row">
+      <text class="lab">徽章</text>
+      <input class="ipt" data-k="badge" value="{{form.badge}}" bindinput="onInput" placeholder="如：明星款 / 新品"/>
+    </view>
+    <view class="row">
+      <text class="lab">材质</text>
+      <input class="ipt" data-k="material" value="{{form.material}}" bindinput="onInput" placeholder="如：铝合金 6063-T5"/>
+    </view>
+    <view class="row">
+      <text class="lab">防火等级</text>
+      <input class="ipt" data-k="fireRating" value="{{form.fireRating}}" bindinput="onInput" placeholder="如：A级"/>
+    </view>
+    <view class="row">
+      <text class="lab">表面处理</text>
+      <input class="ipt" data-k="surface" value="{{form.surface}}" bindinput="onInput" placeholder="如：阳极氧化"/>
+    </view>
+  </view>
+
+  <section-title title="产品描述"/>
+  <view class="card">
+    <textarea class="ta" data-k="description" value="{{form.description}}" bindinput="onInput"
+              placeholder="详细介绍产品特性、应用场景..." auto-height/>
+  </view>
+
+  <section-title title="主图"/>
+  <view class="card">
+    <upload-image value="{{form.cover}}" max="{{1}}" bind:change="onCoverChange"/>
+  </view>
+
+  <section-title title="图集"/>
+  <view class="card">
+    <upload-image value="{{form.images}}" max="{{8}}" multiple bind:change="onImagesChange"/>
+  </view>
+
+  <section-title title="三大卖点"/>
+  <view class="card">
+    <view wx:for="{{form.features}}" wx:key="index" class="feat">
+      <view class="f-num">{{index + 1}}</view>
+      <view class="f-body">
+        <view class="row">
+          <text class="lab">图标</text>
+          <input class="ipt" data-idx="{{index}}" data-k="icon" value="{{item.icon}}" bindinput="onFeatureInput" placeholder="如：🛡️"/>
+        </view>
+        <view class="row">
+          <text class="lab">标题</text>
+          <input class="ipt" data-idx="{{index}}" data-k="title" value="{{item.title}}" bindinput="onFeatureInput"/>
+        </view>
+        <view class="row">
+          <text class="lab">描述</text>
+          <input class="ipt" data-idx="{{index}}" data-k="desc" value="{{item.desc}}" bindinput="onFeatureInput"/>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <section-title title="技术规格"/>
+  <view class="card">
+    <kv-editor value="{{form.specs}}" labelKey="label" valueKey="value"
+               labelPlaceholder="参数名" valuePlaceholder="参数值" bind:change="onSpecsChange"/>
+  </view>
+
+  <view class="footer">
+    <button class="btn-submit {{submitting ? 'disabled' : ''}}" disabled="{{submitting}}" bindtap="onSubmit">
+      {{submitting ? '保存中...' : '保存'}}
+    </button>
+  </view>
+</view>

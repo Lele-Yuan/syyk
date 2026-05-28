@@ -1,34 +1,23 @@
-/**index.wxss**/
-.head{
-	text-align: center;
+.ab { background: #fff; min-height: 100vh; padding-bottom: 64rpx; }
+.hero { position: relative; width: 100%; height: 480rpx; }
+.h-img { width: 100%; height: 100%; }
+.h-mask {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(0,32,69,0.7), rgba(0,32,69,0.2));
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 40rpx;
+  color: #fff;
 }
-.head-img{
-	width: 120px;
-	height: 120px;
-	display: block;
-	margin: auto;
-}
+.brand { font-size: 56rpx; font-weight: 700; }
+.slogan { font-size: 26rpx; opacity: 0.95; margin-top: 12rpx; }
 
-.info-list{
-	font-size: 12px;
-	color: #8a8a8a;
-	padding: 40px 20px;
-}
-.info-item{
-	display: flex;
-	padding-top: 20px;
-}
-.info-item .item-icon{
-	width: 20px;
-	height: 20px;
-	vertical-align: top;
-	padding-right: 5px;
-}
-.info-item text{
-	line-height: 20px;
-}
-.weui-cell__ft_in-access{
-	margin:auto;
-	top: 0;
-	bottom:0;
-}
+.intro { padding: 32rpx; font-size: 28rpx; line-height: 1.8; color: #43474E; }
+.office { padding: 32rpx; margin-top: 16rpx; }
+.o-city { font-size: 32rpx; color: #002045; font-weight: 600; margin-bottom: 16rpx; }
+.o-row { display: flex; padding: 16rpx 0; gap: 16rpx; align-items: center; }
+.o-ic { font-size: 28rpx; }
+.o-val { font-size: 28rpx; color: #181C1E; }
+.o-phone { color: #A63B00; }
+
+.qua { padding: 32rpx; }
+.q-i { padding: 12rpx 0; font-size: 28rpx; color: #181C1E; }

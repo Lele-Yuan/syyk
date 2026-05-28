@@ -1,0 +1,15 @@
+.fab {
+  position: fixed;
+  right: 32rpx;
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+  background: #002045;
+  color: #fff;
+  box-shadow: 0 8rpx 24rpx rgba(0,0,0,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+}
+.fab .ic { font-size: 48rpx; line-height: 1; }

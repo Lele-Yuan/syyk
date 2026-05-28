@@ -1,0 +1,23 @@
+<view class="mgr">
+  <view class="bar">
+    <view class="bar-title">工程作品列表（{{list.length}}）</view>
+    <view class="bar-add" bindtap="onAdd">+ 新增</view>
+  </view>
+  <view wx:if="{{loading}}" class="empty">加载中...</view>
+  <view wx:elif="{{list.length === 0}}" class="empty">暂无数据，点击右上角新增</view>
+  <view wx:else class="list">
+    <view wx:for="{{list}}" wx:key="_id" class="item">
+      <view class="card">
+        <image src="{{item.cover}}" mode="aspectFill" class="cover"/>
+        <view class="info">
+          <view class="title">{{item.title}}</view>
+          <view class="meta">{{item.location}} · {{item.area}}㎡</view>
+        </view>
+        <view class="acts">
+          <view class="btn-edit" data-id="{{item._id}}" bindtap="onEdit">编辑</view>
+          <view class="btn-del" data-id="{{item._id}}" bindtap="onDelete">删除</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

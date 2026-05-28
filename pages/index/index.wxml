@@ -1,56 +1,65 @@
-<!--index.wxml-->
-<swiper indicator-dots="{{indicatorDots}}"
-  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-  <block wx:for="{{imgUrls}}" wx:for-index="index">
-    <swiper-item>
-      <image src="{{item.picUrl}}" class="slide-image"/>
-    </swiper-item>
-  </block>
-</swiper>
-
-<view class="section">
-  <navigator url="../cases/index" open-type="switchTab" class="text">
-    <view class="line_flag"></view>
-    <text class="weui-cell__bd title">案例展示</text>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
-
-  <view class="scroll-x productions">
-    <view class="scroll-x-H" width="">
-      <view class="scroll-x-item" wx:for="{{productImgUrls}}" wx:for-index="index">
-        <image src="{{item.pic}}" bindtap="showImages" data-classify="productions" data-current="{{index}}" />
-      </view>
+<view class="home">
+  <!-- Banner 轮播 -->
+  <view class="banner">
+    <swiper class="sw" autoplay indicator-dots="{{false}}" circular bindchange="onSwiperChange">
+      <swiper-item wx:for="{{banners}}" wx:key="index">
+        <image src="{{item}}" mode="aspectFill" class="b-img" data-i="{{index}}" binderror="onBannerError"/>
+      </swiper-item>
+    </swiper>
+    <view class="b-mask">
+      <view wx:if="{{homeTag}}" class="b-tag">{{homeTag}}</view>
+      <view class="b-title">{{homeTitle}}</view>
+      <view wx:if="{{homeSubtitle}}" class="b-sub">{{homeSubtitle}}</view>
     </view>
-  </view>  
-</view>
-
-<view class="section">
-  <navigator url="../models/index" class="text">
-    <view class="line_flag"></view>
-    <text class="weui-cell__bd title">小样定制</text>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
-
-  <view class="row models">
-    <view class="col-6" wx:for="{{modelImgUrls}}" wx:for-index="index">
-      <image src="{{item.pic}}" mode="aspectFill" bindtap="showImages" data-classify="models" data-current="{{index}}" />
+    <view class="b-dots">
+      <view wx:for="{{banners}}" wx:key="index" class="d {{bannerIdx === index ? 'd-on' : ''}}"></view>
     </view>
   </view>
-</view>
 
-<view class="section">
-  <navigator url="../productions/index" class="text">
-    <view class="line_flag"></view>
-    <text class="weui-cell__bd title">产品展示</text>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
-
-
-  <view class="scroll-x productions">
-    <view class="scroll-x-H" width="">
-      <view class="scroll-x-item" wx:for="{{componentImgUrls}}" wx:for-index="index">
-        <image src="{{item.pic}}" bindtap="showImages" data-classify="components" data-current="{{index}}" />
+  <!-- 公司信息 -->
+  <view class="page-wrap">
+    <view class="offices">
+      <view wx:for="{{offices}}" wx:key="city" class="o-card">
+        <view class="o-icon">📍</view>
+        <view class="o-info">
+          <view class="o-city">{{item.city}}</view>
+          <view class="o-addr">{{item.addr}}</view>
+        </view>
       </view>
     </view>
-  </view>  
+
+    <!-- 功能图标区 -->
+    <section-title title="核心服务" extra-en="CORE SERVICES"/>
+    <view class="entries">
+      <view wx:for="{{quickEntries}}" wx:key="label" class="entry"
+            data-url="{{item.url}}" data-type="{{item.type}}" bindtap="onEntry">
+        <view class="entry-ic"><text>{{item.icon}}</text></view>
+        <view class="entry-lab">{{item.label}}</view>
+      </view>
+    </view>
+
+    <!-- 工程案例 -->
+    <section-title title="局部工程案例" extra="查看全部"/>
+    <scroll-view scroll-x class="case-scroll" enhanced show-scrollbar="{{false}}">
+      <view wx:for="{{cases}}" wx:key="_id" class="cs-item" data-id="{{item._id}}" bindtap="onCase">
+        <image src="{{item.cover || caseFallback}}" mode="aspectFill" class="cs-img" data-i="{{index}}" binderror="onCaseImgError"/>
+        <view class="cs-title">{{item.title}}</view>
+        <view class="cs-sub">{{item.location || '沈阳'}} · {{item.area || ''}}</view>
+      </view>
+      <view wx:if="{{!cases.length}}" class="cs-item cs-empty">
+        <image src="/images/default-cover.png" mode="aspectFill" class="cs-img"/>
+        <view class="cs-title">沈阳科技总部园玻璃隔断工程</view>
+        <view class="cs-sub">示例数据 · 4200㎡</view>
+      </view>
+    </scroll-view>
+
+    <!-- 实力卡片 -->
+    <view class="brand-card">
+      <view class="bc-title">东北市场领导品牌</view>
+      <view class="bc-sub">12年深耕，累计交付面积超过 1,000,000+ ㎡</view>
+      <view class="bc-btn" bindtap="onFab">立即获取报价方案</view>
+    </view>
+  </view>
+
+  <floating-btn icon="💬" bottom="{{200}}" bindtap="onFab"/>
 </view>

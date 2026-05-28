@@ -1,0 +1,46 @@
+.ccard {
+  background: #fff;
+  border: 2rpx solid rgba(196,198,207,0.3);
+  border-radius: 24rpx;
+  overflow: hidden;
+  margin-bottom: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.04);
+}
+.ccard .cover {
+  width: 100%; height: 440rpx; position: relative;
+  background: #f1f1f1;
+}
+.ccard .cover .img { width: 100%; height: 100%; }
+.ccard .badges {
+  position: absolute; top: 24rpx; left: 24rpx;
+  display: flex; gap: 16rpx;
+}
+.ccard .b1, .ccard .b2 {
+  padding: 8rpx 20rpx; border-radius: 12rpx;
+  font-size: 22rpx; font-weight: 600;
+}
+.ccard .b1 { background: rgba(255,255,255,0.85); color: #002045; backdrop-filter: blur(8rpx); }
+.ccard .b2 { background: rgba(0,32,69,0.9); color: #fff; }
+.ccard .admin-ops {
+  position: absolute; top: 24rpx; right: 24rpx;
+  display: flex; gap: 16rpx;
+}
+.ccard .op-btn {
+  background: rgba(255,255,255,0.95); color: #002045;
+  font-size: 22rpx; padding: 8rpx 20rpx; border-radius: 12rpx;
+}
+.ccard .op-btn.op-del { background: #ffebe5; color: #d23900; }
+.ccard .body { padding: 32rpx; }
+.ccard .row { display: flex; justify-content: space-between; align-items: flex-start; }
+.ccard .loc { font-size: 22rpx; color: #43474E; }
+.ccard .title { font-size: 36rpx; color: #002045; font-weight: 600; margin-top: 8rpx; }
+.ccard .area { text-align: right; }
+.ccard .area .lab { font-size: 22rpx; color: #A63B00; font-family: Menlo, monospace; }
+.ccard .area .val { font-size: 36rpx; color: #002045; font-weight: 700; font-family: Menlo, monospace; }
+.ccard .tags { margin-top: 24rpx; display: flex; flex-wrap: wrap; }
+.ccard .tag-soft {
+  background: #E5E9EB; color: #39485C;
+  font-size: 22rpx; padding: 8rpx 16rpx;
+  border-radius: 12rpx; margin-right: 16rpx; margin-bottom: 8rpx;
+}
+.ccard .sum { margin-top: 16rpx; font-size: 26rpx; color: #43474E; line-height: 1.6; }

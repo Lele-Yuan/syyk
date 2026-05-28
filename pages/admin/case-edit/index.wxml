@@ -1,0 +1,77 @@
+<view class="edit">
+  <section-title title="项目基本信息"/>
+  <view class="card">
+    <view class="row"><text class="lab">标题 *</text><input class="ipt" data-k="title" value="{{form.title}}" bindinput="onInput"/></view>
+    <view class="row"><text class="lab">副标题</text><input class="ipt" data-k="subtitle" value="{{form.subtitle}}" bindinput="onInput"/></view>
+    <view class="row">
+      <text class="lab">分类</text>
+      <picker class="ipt" range="{{categories}}" value="{{catIdx}}" bindchange="onCatChange">
+        <view>{{categories[catIdx]}} ›</view>
+      </picker>
+    </view>
+    <view class="row"><text class="lab">项目地址</text><input class="ipt" data-k="location" value="{{form.location}}" bindinput="onInput"/></view>
+    <view class="row"><text class="lab">面积(㎡)</text><input class="ipt" data-k="area" type="digit" value="{{form.area}}" bindinput="onInput"/></view>
+    <view class="row"><text class="lab">工期</text><input class="ipt" data-k="duration" value="{{form.duration}}" bindinput="onInput" placeholder="如：30天"/></view>
+    <view class="row"><text class="lab">主要型材</text><input class="ipt" data-k="mainMaterial" value="{{form.mainMaterial}}" bindinput="onInput"/></view>
+    <view class="row"><text class="lab">难点</text><input class="ipt" data-k="difficulty" value="{{form.difficulty}}" bindinput="onInput"/></view>
+    <view class="row"><text class="lab">标签</text><input class="ipt" data-k="tags" value="{{form.tags}}" bindinput="onInput" placeholder="逗号分隔"/></view>
+  </view>
+
+  <section-title title="项目概况"/>
+  <view class="card">
+    <textarea class="ta" data-k="description" value="{{form.description}}" bindinput="onInput" auto-height/>
+  </view>
+
+  <section-title title="主图"/>
+  <view class="card"><upload-image value="{{form.cover}}" max="{{1}}" bind:change="onCoverChange"/></view>
+
+  <section-title title="实景展示"/>
+  <view class="card"><upload-image value="{{form.images}}" max="{{12}}" multiple bind:change="onImagesChange"/></view>
+
+  <section-title title="数据三栏"/>
+  <view class="card">
+    <kv-editor value="{{form.stats}}" labelKey="label" valueKey="value"
+               labelPlaceholder="如：施工面积" valuePlaceholder="如：3500㎡" bind:change="onStatsChange"/>
+  </view>
+
+  <section-title title="施工流程"/>
+  <view class="card">
+    <steps-editor value="{{form.steps}}" bind:change="onStepsChange"/>
+  </view>
+
+  <section-title title="所用材料"/>
+  <view class="card">
+    <view wx:for="{{form.materials}}" wx:key="index" class="mat-row">
+      <view class="mat-h">
+        <text class="mat-ic-emoji">{{item.icon || '🧱'}}</text>
+        <input class="mat-name" placeholder="材料名称" value="{{item.name}}"
+               data-i="{{index}}" data-k="name" bindinput="onMaterialFieldInput"/>
+        <view class="mat-rm" data-i="{{index}}" bindtap="onRemoveMaterial">×</view>
+      </view>
+      <input class="mat-desc-ipt" placeholder="材料描述（可编辑）" value="{{item.desc}}"
+             data-i="{{index}}" data-k="desc" bindinput="onMaterialFieldInput"/>
+      <view wx:if="{{item.productId}}" class="mat-tag">已关联铝型材</view>
+    </view>
+    <view class="mat-actions">
+      <view class="mat-btn primary" bindtap="onPickMaterial">＋ 从铝型材中选择</view>
+      <view class="mat-btn" bindtap="onAddManualMaterial">＋ 手动添加</view>
+    </view>
+  </view>
+
+  <section-title title="客户评价"/>
+  <view class="card">
+    <view class="row"><text class="lab">客户姓名</text><input class="ipt" data-k="name" value="{{form.testimonial.name}}" bindinput="onTestimonialInput"/></view>
+    <view class="row"><text class="lab">职位</text><input class="ipt" data-k="role" value="{{form.testimonial.role}}" bindinput="onTestimonialInput"/></view>
+    <view class="row"><text class="lab">评分</text><input class="ipt" type="number" data-k="rating" value="{{form.testimonial.rating}}" bindinput="onTestimonialInput"/></view>
+    <view class="row v">
+      <text class="lab">评价内容</text>
+      <textarea class="ta" data-k="content" value="{{form.testimonial.content}}" bindinput="onTestimonialInput" auto-height/>
+    </view>
+  </view>
+
+  <view class="footer">
+    <button class="btn-submit {{submitting ? 'disabled' : ''}}" disabled="{{submitting}}" bindtap="onSubmit">
+      {{submitting ? '保存中...' : '保存'}}
+    </button>
+  </view>
+</view>

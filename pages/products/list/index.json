@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "数字化展厅",
+  "usingComponents": {
+    "section-title": "/components/section-title/index",
+    "product-card": "/components/product-card/index",
+    "floating-btn": "/components/floating-btn/index"
+  }
+}

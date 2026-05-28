@@ -1,0 +1,33 @@
+<view class="home-edit">
+  <view class="section">
+    <view class="sec-title">Banner 图（{{form.banners.length}}/4）</view>
+    <view class="sec-desc">建议比例 16:9，最多 4 张</view>
+    <upload-image value="{{form.banners}}" multiple="{{true}}" max="{{4}}" dir="banner"
+                  bind:change="onBannersChange"/>
+  </view>
+
+  <view class="section">
+    <view class="sec-title">顶部 Tag</view>
+    <input class="ipt" placeholder="例如：100系列 极致全景"
+           value="{{form.tag}}" data-k="tag" bindinput="onFieldInput" maxlength="30"/>
+  </view>
+
+  <view class="section">
+    <view class="sec-title">主标题</view>
+    <input class="ipt" placeholder="例如：沈阳银科隔墙"
+           value="{{form.title}}" data-k="title" bindinput="onFieldInput" maxlength="20"/>
+  </view>
+
+  <view class="section">
+    <view class="sec-title">副标题</view>
+    <input class="ipt" placeholder="例如：东北工业级隔断系统领导品牌"
+           value="{{form.subtitle}}" data-k="subtitle" bindinput="onFieldInput" maxlength="40"/>
+  </view>
+
+  <view class="actions">
+    <view class="btn ghost" bindtap="onResetDefaults">恢复默认文案</view>
+    <view class="btn primary {{submitting ? 'disabled' : ''}}" bindtap="onSave">
+      {{submitting ? '保存中...' : '保存'}}
+    </view>
+  </view>
+</view>

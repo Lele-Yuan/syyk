@@ -1,0 +1,129 @@
+.cs-detail { background: #fff; min-height: 100vh; padding-bottom: 200rpx; }
+.hero { position: relative; width: 100%; height: 580rpx; }
+.h-img { width: 100%; height: 100%; }
+.h-mask {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 40rpx;
+  color: #fff;
+}
+.h-tag {
+  display: inline-block; align-self: flex-start;
+  padding: 8rpx 24rpx;
+  background: #FC6C29;
+  border-radius: 24rpx;
+  font-size: 22rpx;
+  margin-bottom: 16rpx;
+}
+.h-title { font-size: 48rpx; font-weight: 700; }
+.h-sub { font-size: 26rpx; margin-top: 12rpx; opacity: 0.95; }
+
+.stats {
+  display: flex; gap: 16rpx;
+  margin-top: -40rpx; margin-bottom: 32rpx;
+  position: relative;
+  z-index: 2;
+}
+.st {
+  flex: 1;
+  background: #fff;
+  border: 2rpx solid rgba(196,198,207,0.3);
+  border-radius: 24rpx;
+  padding: 24rpx 16rpx;
+  text-align: center;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.04);
+}
+.st-v { font-size: 32rpx; color: #A63B00; font-weight: 700; font-family: Menlo, monospace; }
+.st-l { font-size: 22rpx; color: #43474E; margin-top: 4rpx; }
+
+.overview { padding: 32rpx; margin-top: 24rpx; }
+.ov-text { font-size: 28rpx; color: #43474E; line-height: 1.7; margin-bottom: 24rpx; }
+.ov-row { display: flex; padding: 16rpx 0; }
+.ov-ic { width: 48rpx; font-size: 28rpx; }
+.ov-lab { font-size: 28rpx; color: #181C1E; }
+.ov-val { font-size: 24rpx; color: #43474E; margin-top: 4rpx; }
+
+.gal { white-space: nowrap; margin: 16rpx -40rpx 32rpx; padding-left: 40rpx; }
+.g-img {
+  display: inline-block;
+  width: 560rpx; height: 720rpx;
+  border-radius: 24rpx;
+  margin-right: 24rpx;
+  vertical-align: top;
+}
+
+.steps { margin: 16rpx 0 32rpx; padding-left: 24rpx; }
+.step {
+  display: flex; gap: 24rpx;
+  padding: 16rpx 0 24rpx;
+  border-left: 2rpx solid rgba(166,59,0,0.2);
+  margin-left: 16rpx;
+  padding-left: 32rpx;
+  position: relative;
+}
+.s-num {
+  position: absolute; left: -22rpx; top: 16rpx;
+  width: 44rpx; height: 44rpx; border-radius: 50%;
+  background: #A63B00; color: #fff;
+  text-align: center; line-height: 44rpx;
+  font-size: 22rpx; font-weight: 700;
+}
+.s-title { font-size: 30rpx; color: #181C1E; }
+.s-desc { font-size: 26rpx; color: #43474E; margin-top: 8rpx; line-height: 1.6; }
+
+.mat-card {
+  background: #002045;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  display: flex; align-items: center; gap: 24rpx;
+  margin: 16rpx 0;
+}
+.mat-ic {
+  width: 120rpx; height: 120rpx;
+  background: rgba(255,255,255,0.1);
+  border-radius: 16rpx;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.mat-ic image { width: 60rpx; height: 60rpx; }
+.mat-ic text { font-size: 60rpx; line-height: 1; }
+.mat-title { font-size: 30rpx; color: #fff; font-weight: 600; }
+.mat-desc { font-size: 24rpx; color: rgba(255,255,255,0.8); margin-top: 8rpx; line-height: 1.5; }
+.mat-link { font-size: 24rpx; color: #FFDBCE; margin-top: 12rpx; }
+
+.testi {
+  margin: 32rpx 0;
+  background: #F1F4F6;
+  border-radius: 24rpx;
+  padding: 32rpx;
+}
+.t-head { display: flex; align-items: center; gap: 16rpx; margin-bottom: 16rpx; }
+.t-avt {
+  width: 80rpx; height: 80rpx; border-radius: 50%;
+  background: linear-gradient(135deg, #002045, #1A365D);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32rpx; font-weight: 600;
+  flex-shrink: 0;
+}
+.t-name { font-size: 28rpx; color: #181C1E; }
+.t-role { font-size: 22rpx; color: #43474E; margin-top: 4rpx; }
+.t-quote { font-size: 28rpx; color: #181C1E; line-height: 1.7; font-style: italic; }
+.t-stars { margin-top: 16rpx; color: #FFB800; font-size: 28rpx; letter-spacing: 6rpx; }
+
+.bottom-cta {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  padding: 24rpx 40rpx calc(24rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -4rpx 16rpx rgba(0,0,0,0.06);
+}
+.cta-btn {
+  background: #FC6C29;
+  color: #fff;
+  border-radius: 16rpx;
+  padding: 28rpx 0;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: 600;
+}

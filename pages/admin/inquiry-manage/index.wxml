@@ -1,0 +1,22 @@
+<view class="mgr">
+  <view class="tabs">
+    <view wx:for="{{tabs}}" wx:key="key"
+          class="tab {{tabKey === item.key ? 'active' : ''}}"
+          data-key="{{item.key}}" bindtap="onTab">{{item.label}}</view>
+  </view>
+
+  <view wx:if="{{loading}}" class="empty">加载中...</view>
+  <view wx:elif="{{list.length === 0}}" class="empty">暂无询价</view>
+  <view wx:else class="list">
+    <view wx:for="{{list}}" wx:key="_id" class="item"
+          data-id="{{item._id}}" bindtap="onItem">
+      <view class="head">
+        <view class="t">{{item.projectName}}</view>
+        <view class="badge st-{{item.status}}">{{item.statusText}}</view>
+      </view>
+      <view class="meta">{{item.userName}} · {{item.phone}}</view>
+      <view class="addr">📍 {{item.address}} · {{item.area}}㎡</view>
+      <view class="time">{{item.timeText}}</view>
+    </view>
+  </view>
+</view>

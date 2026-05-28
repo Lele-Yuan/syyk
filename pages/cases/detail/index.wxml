@@ -1,0 +1,96 @@
+<view class="cs-detail" wx:if="{{caseInfo}}">
+  <!-- 顶部 Banner -->
+  <view class="hero">
+    <image src="{{caseInfo.cover}}" mode="aspectFill" class="h-img"/>
+    <view class="h-mask">
+      <view wx:if="{{caseInfo.subtitle}}" class="h-tag">{{caseInfo.subtitle}}</view>
+      <view class="h-title">{{caseInfo.title}}</view>
+      <view wx:if="{{caseInfo.summary}}" class="h-sub">{{caseInfo.summary}}</view>
+    </view>
+  </view>
+
+  <view class="page-wrap">
+    <!-- 数据三栏 -->
+    <view wx:if="{{caseInfo.stats && caseInfo.stats.length}}" class="stats">
+      <view wx:for="{{caseInfo.stats}}" wx:key="label" class="st">
+        <view class="st-v">{{item.value}}</view>
+        <view class="st-l">{{item.label}}</view>
+      </view>
+    </view>
+
+    <!-- 项目概况 -->
+    <section-title title="项目概况"/>
+    <view class="card overview">
+      <view wx:if="{{caseInfo.description}}" class="ov-text">{{caseInfo.description}}</view>
+      <view class="ov-row">
+        <view class="ov-ic">📍</view>
+        <view class="ov-info">
+          <view class="ov-lab">项目地址</view>
+          <view class="ov-val">{{caseInfo.address || '—'}}</view>
+        </view>
+      </view>
+      <view class="ov-row">
+        <view class="ov-ic">⚠️</view>
+        <view class="ov-info">
+          <view class="ov-lab">施工难点</view>
+          <view class="ov-val">{{caseInfo.difficulty || '—'}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 实景展示 -->
+    <view wx:if="{{caseInfo.gallery && caseInfo.gallery.length}}">
+      <section-title title="实景展示" extra="{{caseInfo.gallery.length}}张实拍"/>
+      <scroll-view scroll-x class="gal" enhanced show-scrollbar="{{false}}">
+        <image wx:for="{{caseInfo.gallery}}" wx:key="*this" src="{{item}}" mode="aspectFill" class="g-img"/>
+      </scroll-view>
+    </view>
+
+    <!-- 施工流程 -->
+    <view wx:if="{{caseInfo.steps && caseInfo.steps.length}}">
+      <section-title title="施工流程"/>
+      <view class="steps">
+        <view wx:for="{{caseInfo.steps}}" wx:key="title" class="step">
+          <view class="s-num">{{index + 1}}</view>
+          <view class="s-body">
+            <view class="s-title">{{item.title}}</view>
+            <view class="s-desc">{{item.desc}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 所用材料 -->
+    <view wx:if="{{caseInfo.materials && caseInfo.materials.length}}">
+      <section-title title="所用材料"/>
+      <view wx:for="{{caseInfo.materials}}" wx:key="name" class="mat-card" data-id="{{item.productId}}" bindtap="onProduct">
+        <view class="mat-ic"><text>{{item.icon || '🧱'}}</text></view>
+        <view class="mat-info">
+          <view class="mat-title">{{item.name}}</view>
+          <view class="mat-desc">{{item.desc}}</view>
+          <view class="mat-link">查看产品详情 →</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 客户评价 -->
+    <view wx:if="{{caseInfo.testimonial && caseInfo.testimonial.content}}" class="testi">
+      <view class="t-head">
+        <view class="t-avt">{{caseInfo.testimonial.name && caseInfo.testimonial.name.charAt ? caseInfo.testimonial.name.charAt(0) : '客'}}</view>
+        <view>
+          <view class="t-name">项目负责人：{{caseInfo.testimonial.name}}</view>
+          <view class="t-role">{{caseInfo.testimonial.role}}</view>
+        </view>
+      </view>
+      <view class="t-quote">"{{caseInfo.testimonial.content}}"</view>
+      <view class="t-stars">
+        <text wx:for="{{[1,2,3,4,5]}}" wx:key="*this">{{ index < (caseInfo.testimonial.rating || 5) ? '★' : '☆' }}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-cta">
+    <view class="cta-btn" bindtap="onInquiry">📞 获取同款方案报价</view>
+  </view>
+</view>
+<view wx:else class="empty-state">加载中…</view>

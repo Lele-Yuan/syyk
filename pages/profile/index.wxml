@@ -1,0 +1,43 @@
+<view class="profile">
+  <view wx:if="{{authed && user}}" class="user-card">
+    <image wx:if="{{user.avatarUrl}}" src="{{user.avatarUrl}}" class="avatar"/>
+    <view wx:else class="avatar avatar-text">{{ user.nickName ? user.nickName.charAt(0) : '微' }}</view>
+    <view class="info">
+      <view class="name">{{user.nickName || '微信用户'}}</view>
+      <view class="role role-{{user.role}}">{{ isAdmin ? '管理员' : '普通用户' }}</view>
+    </view>
+  </view>
+
+  <view wx:if="{{authed}}" class="page-wrap">
+    <view class="group">
+      <view class="g-title">服务中心</view>
+      <view class="row" bindtap="onMyInquiry">
+        <text class="r-ic">📝</text><text class="r-lab">我的询价</text><text class="r-arrow">›</text>
+      </view>
+      <view class="row" bindtap="onAbout">
+        <text class="r-ic">🏢</text><text class="r-lab">关于我们</text><text class="r-arrow">›</text>
+      </view>
+    </view>
+
+    <view wx:if="{{isAdmin}}" class="group">
+      <view class="g-title">管理员中心</view>
+      <view class="row" bindtap="onAdminHome">
+        <text class="r-ic">🖼️</text><text class="r-lab">首页内容管理</text><text class="r-arrow">›</text>
+      </view>
+      <view class="row" bindtap="onAdminProducts">
+        <text class="r-ic">🧩</text><text class="r-lab">铝型材管理</text><text class="r-arrow">›</text>
+      </view>
+      <view class="row" bindtap="onAdminCases">
+        <text class="r-ic">🏗️</text><text class="r-lab">工程作品管理</text><text class="r-arrow">›</text>
+      </view>
+      <view class="row" bindtap="onAdminInquiry">
+        <text class="r-ic">📨</text><text class="r-lab">询价管理</text><text class="r-arrow">›</text>
+      </view>
+    </view>
+
+    <view class="logout" bindtap="onLogout">退出登录</view>
+  </view>
+
+  <login-mask visible="{{showLogin}}" title="登录后查看个人中心"
+              bind:success="onLoginSuccess" bind:cancel="onCancelLogin"/>
+</view>

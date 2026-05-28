@@ -1,0 +1,4 @@
+{
+  "navigationBarTitleText": "铝型材管理",
+  "usingComponents": { "product-card": "/components/product-card/index" }
+}

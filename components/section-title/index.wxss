@@ -1,0 +1,30 @@
+.sec-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 0;
+}
+.sec-title .row { display: flex; align-items: center; }
+.sec-title .bar {
+  width: 8rpx;
+  height: 40rpx;
+  background: #A63B00;
+  border-radius: 4rpx;
+  margin-right: 16rpx;
+}
+.sec-title .txt {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #002045;
+  line-height: 1.2;
+}
+.sec-title .extra {
+  font-size: 24rpx;
+  color: #43474E;
+}
+.sec-title .extra-en {
+  font-size: 22rpx;
+  color: #A63B00;
+  letter-spacing: 1rpx;
+  font-family: Menlo, Consolas, monospace;
+}

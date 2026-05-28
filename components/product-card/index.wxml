@@ -1,0 +1,24 @@
+<view class="pcard" bindtap="onTap">
+  <view class="cover">
+    <image src="{{coverSrc}}" mode="aspectFill" class="img" binderror="onImgError"/>
+    <view wx:if="{{item.badge}}" class="badge {{item.badgeType === 'fire' ? 'badge-fire' : ''}}">{{item.badge}}</view>
+    <view wx:if="{{admin}}" class="admin-ops" catchtap="noop">
+      <view class="op-btn" catchtap="onEdit">编辑</view>
+      <view class="op-btn op-del" catchtap="onDelete">删除</view>
+    </view>
+  </view>
+  <view class="body">
+    <view class="title">{{item.title}}</view>
+    <view class="meta">
+      <text wx:if="{{item.acoustic}}" class="meta-i">🔇 {{item.acoustic}}</text>
+      <text wx:if="{{item.thickness}}" class="meta-i">📏 {{item.thickness}}</text>
+    </view>
+    <view class="footer">
+      <view class="left">
+        <view class="lab">{{item.material || '工程系列'}}</view>
+        <view class="sub">{{item.feature || '工程首选'}}</view>
+      </view>
+      <view class="btn-inquiry" catchtap="onInquiry">询价</view>
+    </view>
+  </view>
+</view>

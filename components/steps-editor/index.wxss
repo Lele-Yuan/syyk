@@ -1,0 +1,28 @@
+.se-wrap { display: flex; flex-direction: column; gap: 16rpx; }
+.se-row { display: flex; align-items: flex-start; gap: 16rpx; }
+.se-num {
+  width: 48rpx; height: 48rpx; border-radius: 50%;
+  background: #A63B00; color: #fff;
+  text-align: center; line-height: 48rpx;
+  font-size: 24rpx; font-weight: 700; flex-shrink: 0;
+  margin-top: 12rpx;
+}
+.se-fields { flex: 1; display: flex; flex-direction: column; gap: 8rpx; }
+.se-i, .se-t {
+  width: 100%; padding: 16rpx 20rpx;
+  border: 2rpx solid #EBEEF0; border-radius: 12rpx;
+  background: #fff; font-size: 26rpx;
+}
+.se-t { min-height: 80rpx; }
+.se-rm {
+  width: 60rpx; height: 60rpx; border-radius: 50%;
+  background: #ffebe5; color: #d23900;
+  text-align: center; line-height: 56rpx; font-size: 36rpx;
+  margin-top: 12rpx;
+}
+.se-add {
+  text-align: center; padding: 20rpx;
+  background: #F1F4F6; border-radius: 12rpx;
+  color: #A63B00; font-size: 26rpx;
+  margin-top: 8rpx;
+}

@@ -1,0 +1,65 @@
+<view class="inq">
+  <view wx:if="{{authed}}" class="page-wrap">
+    <view class="hd-title">咨询询价</view>
+    <view class="hd-sub">留下项目信息，我们将尽快与您联系</view>
+
+    <view class="seg">
+      <view class="seg-i {{activeTab === 'submit' ? 'on' : ''}}" data-k="submit" bindtap="onTab">提交询价</view>
+      <view class="seg-i {{activeTab === 'mine' ? 'on' : ''}}" data-k="mine" bindtap="onTab">我的询价</view>
+    </view>
+
+    <!-- 提交询价 -->
+    <view wx:if="{{activeTab === 'submit'}}" class="form">
+      <view class="fld">
+        <view class="lab">项目名称<text class="req">*</text></view>
+        <input value="{{form.projectName}}" data-k="projectName" bindinput="onInput" placeholder="如：XX科技公司总部装修" class="ipt"/>
+      </view>
+      <view class="fld">
+        <view class="lab">联系人姓名<text class="req">*</text></view>
+        <input value="{{form.userName}}" data-k="userName" bindinput="onInput" placeholder="请输入姓名" class="ipt"/>
+      </view>
+      <view class="fld">
+        <view class="lab">联系电话<text class="req">*</text></view>
+        <input value="{{form.phone}}" data-k="phone" bindinput="onInput" placeholder="11位手机号" type="number" maxlength="11" class="ipt"/>
+      </view>
+      <view class="fld">
+        <view class="lab">项目地址<text class="req">*</text></view>
+        <input value="{{form.address}}" data-k="address" bindinput="onInput" placeholder="省市区 + 详细地址" class="ipt"/>
+      </view>
+      <view class="fld">
+        <view class="lab">项目面积（㎡）<text class="req">*</text></view>
+        <input value="{{form.area}}" data-k="area" bindinput="onInput" placeholder="请输入面积" type="digit" class="ipt"/>
+      </view>
+      <view class="fld">
+        <view class="lab">意向系列</view>
+        <picker range="{{seriesOpts}}" value="{{form.seriesIdx}}" bindchange="onSeries">
+          <view class="ipt">{{seriesOpts[form.seriesIdx]}}</view>
+        </picker>
+      </view>
+      <view class="fld">
+        <view class="lab">备注</view>
+        <textarea value="{{form.remark}}" data-k="remark" bindinput="onInput" placeholder="请补充其他需求…" class="ipt ta" auto-height/>
+      </view>
+      <view class="submit" bindtap="onSubmit">提交询价</view>
+    </view>
+
+    <!-- 我的询价 -->
+    <view wx:if="{{activeTab === 'mine'}}" class="mine">
+      <view wx:for="{{inquiries}}" wx:key="_id" class="inq-i" data-id="{{item._id}}" bindtap="onItemTap">
+        <view class="i-head">
+          <view class="i-name">{{item.projectName}}</view>
+          <view class="i-st i-st-{{item.status}}">{{item.statusTxt}}</view>
+        </view>
+        <view class="i-meta">
+          <view>📍 {{item.address}}</view>
+          <view>📐 {{item.area}}㎡ · {{item.series || '未指定'}}</view>
+          <view class="i-time">{{item.createdTxt}}</view>
+        </view>
+      </view>
+      <view wx:if="{{!inquiries.length}}" class="empty-state">还没有询价记录，去提交一条吧</view>
+    </view>
+  </view>
+
+  <login-mask visible="{{showLogin}}" title="提交询价需要登录" desc="授权后我们才能为您建立专属档案"
+              bind:success="onLoginSuccess" bind:cancel="onCancelLogin"/>
+</view>

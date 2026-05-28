@@ -1,0 +1,8 @@
+<view class="kv-wrap">
+  <view wx:for="{{items}}" wx:key="index" class="kv-row">
+    <input class="kv-i" placeholder="{{labelPlaceholder}}" value="{{item.label}}" data-i="{{index}}" data-k="label" bindinput="onInput"/>
+    <input class="kv-i" placeholder="{{valuePlaceholder}}" value="{{item.value}}" data-i="{{index}}" data-k="value" bindinput="onInput"/>
+    <view class="kv-rm" data-i="{{index}}" bindtap="onRemove">×</view>
+  </view>
+  <view class="kv-add" bindtap="onAdd">+ 添加一行</view>
+</view>

@@ -1,0 +1,4 @@
+{
+  "navigationBarTitleText": "询价详情",
+  "usingComponents": { "section-title": "/components/section-title/index" }
+}

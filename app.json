@@ -1,45 +1,65 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/productions/index",
-    "pages/cases/index",
-    "pages/models/index",
+    "pages/products/list/index",
+    "pages/products/detail/index",
+    "pages/cases/list/index",
+    "pages/cases/detail/index",
+    "pages/inquiry/index/index",
+    "pages/inquiry/detail/index",
+    "pages/profile/index",
     "pages/about/index",
-    "pages/news/index",
-    "pages/newsDetail/index"
+    "pages/admin/products-manage/index",
+    "pages/admin/cases-manage/index",
+    "pages/admin/product-edit/index",
+    "pages/admin/case-edit/index",
+    "pages/admin/inquiry-manage/index",
+    "pages/admin/inquiry-reply/index"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "沈阳银科隔墙",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "color": "#6e6d6b",
-    "selectedColor": "#eb6836",
+    "color": "#43474E",
+    "selectedColor": "#A63B00",
+    "backgroundColor": "#ffffff",
     "borderStyle": "white",
-    "backgroundColor": "#fff",
-    "list": [{
-      "pagePath": "pages/index/index",
-      "iconPath": "images/footer-icon-01.png",
-      "selectedIconPath": "images/footer-icon-01-active.png",
-      "text": "首页"
-    }, {
-      "pagePath": "pages/news/index",
-      "iconPath": "images/footer-icon-02.png",
-      "selectedIconPath": "images/footer-icon-02-active.png",
-      "text": "资讯动态"
-    }, {
-      "pagePath": "pages/cases/index",
-      "iconPath": "images/footer-icon-03.png",
-      "selectedIconPath": "images/footer-icon-03-active.png",
-      "text": "银科隔墙"
-    }, {
-      "pagePath": "pages/about/index",
-      "iconPath": "images/footer-icon-04.png",
-      "selectedIconPath": "images/footer-icon-04-active.png",
-      "text": "关于我们"
-    }]
-  }
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/footer-icon-01.png",
+        "selectedIconPath": "images/footer-icon-01-active.png"
+      },
+      {
+        "pagePath": "pages/products/list/index",
+        "text": "展厅",
+        "iconPath": "images/footer-icon-02.png",
+        "selectedIconPath": "images/footer-icon-02-active.png"
+      },
+      {
+        "pagePath": "pages/cases/list/index",
+        "text": "案例",
+        "iconPath": "images/footer-icon-03.png",
+        "selectedIconPath": "images/footer-icon-03-active.png"
+      },
+      {
+        "pagePath": "pages/inquiry/index/index",
+        "text": "咨询",
+        "iconPath": "images/footer-icon-04.png",
+        "selectedIconPath": "images/footer-icon-04-active.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "images/footer-icon-05.png",
+        "selectedIconPath": "images/footer-icon-05-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
 }

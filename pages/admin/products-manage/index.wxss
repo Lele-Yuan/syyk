@@ -1,0 +1,14 @@
+.mgr { background: #F1F4F6; min-height: 100vh; padding-bottom: 64rpx; }
+.bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 32rpx; background: #fff;
+}
+.bar-title { font-size: 32rpx; font-weight: 600; color: #002045; }
+.bar-add {
+  background: #A63B00; color: #fff;
+  padding: 12rpx 28rpx; border-radius: 24rpx;
+  font-size: 26rpx;
+}
+.empty { padding: 120rpx 32rpx; text-align: center; color: #67717E; font-size: 26rpx; }
+.list { padding: 16rpx 32rpx; }
+.item { margin-top: 24rpx; }

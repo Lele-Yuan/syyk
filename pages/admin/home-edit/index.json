@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "首页内容管理",
+  "usingComponents": {
+    "upload-image": "/components/upload-image/index"
+  }
+}

@@ -1,0 +1,29 @@
+<view class="iq-d" wx:if="{{item}}">
+  <view class="page-wrap">
+    <view class="hd">
+      <view class="title">{{item.projectName}}</view>
+      <view class="st i-st-{{item.status}}">{{item.statusTxt}}</view>
+    </view>
+    <view class="time">提交于 {{item.createdTxt}}</view>
+
+    <section-title title="项目信息"/>
+    <view class="card info">
+      <view class="row"><text class="lab">联系人</text><text class="val">{{item.userName}}</text></view>
+      <view class="row"><text class="lab">联系电话</text><text class="val">{{item.phone}}</text></view>
+      <view class="row"><text class="lab">项目地址</text><text class="val">{{item.address}}</text></view>
+      <view class="row"><text class="lab">项目面积</text><text class="val">{{item.area}}㎡</text></view>
+      <view class="row"><text class="lab">意向系列</text><text class="val">{{item.series || '未指定'}}</text></view>
+      <view wx:if="{{item.remark}}" class="row col"><text class="lab">备注</text><text class="val">{{item.remark}}</text></view>
+    </view>
+
+    <view wx:if="{{item.reply && item.reply.content}}">
+      <section-title title="管理员回复"/>
+      <view class="card reply">
+        <view class="r-content">{{item.reply.content}}</view>
+        <view class="r-time">{{item.repliedTxt}}</view>
+      </view>
+    </view>
+    <view wx:elif="{{item.status === 'pending'}}" class="empty-state">管理员尚未回复，请耐心等待</view>
+    <view wx:elif="{{item.status === 'closed'}}" class="empty-state">该工单已关闭</view>
+  </view>
+</view>

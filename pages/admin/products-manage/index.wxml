@@ -1,0 +1,14 @@
+<view class="mgr">
+  <view class="bar">
+    <view class="bar-title">铝型材列表（{{list.length}}）</view>
+    <view class="bar-add" bindtap="onAdd">+ 新增</view>
+  </view>
+  <view wx:if="{{loading}}" class="empty">加载中...</view>
+  <view wx:elif="{{list.length === 0}}" class="empty">暂无数据，点击右上角新增</view>
+  <view wx:else class="list">
+    <view wx:for="{{list}}" wx:key="_id" class="item">
+      <product-card item="{{item}}" admin="{{true}}"
+        bind:edit="onEdit" bind:delete="onDelete"/>
+    </view>
+  </view>
+</view>

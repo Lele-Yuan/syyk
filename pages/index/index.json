@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "沈阳银科隔墙",
+  "usingComponents": {
+    "section-title": "/components/section-title/index",
+    "floating-btn": "/components/floating-btn/index"
+  }
+}

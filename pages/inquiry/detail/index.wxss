@@ -1,0 +1,17 @@
+.iq-d { background: #fff; min-height: 100vh; }
+.hd { display: flex; align-items: center; gap: 16rpx; padding-top: 24rpx; }
+.hd .title { flex: 1; font-size: 40rpx; color: #002045; font-weight: 700; }
+.st { font-size: 22rpx; padding: 6rpx 16rpx; border-radius: 12rpx; }
+.i-st-pending { background: #FFF1E8; color: #A63B00; }
+.i-st-replied { background: #E6F7E9; color: #1f7a1f; }
+.i-st-closed { background: #EBEEF0; color: #43474E; }
+.time { font-size: 24rpx; color: #67717E; margin-top: 8rpx; margin-bottom: 16rpx; }
+.info { padding: 16rpx 32rpx; }
+.row { display: flex; padding: 20rpx 0; border-bottom: 2rpx solid #F1F4F6; gap: 24rpx; }
+.row:last-child { border-bottom: none; }
+.row.col { flex-direction: column; gap: 8rpx; }
+.lab { width: 160rpx; color: #67717E; font-size: 26rpx; flex-shrink: 0; }
+.val { flex: 1; color: #181C1E; font-size: 28rpx; word-break: break-all; }
+.reply { padding: 32rpx; background: #F1F4F6; }
+.r-content { font-size: 28rpx; color: #181C1E; line-height: 1.7; }
+.r-time { font-size: 22rpx; color: #67717E; margin-top: 16rpx; }
