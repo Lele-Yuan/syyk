@@ -1,0 +1,32 @@
+<view class="page">
+  <view class="hint">长按右侧手柄拖动可调整顺序</view>
+
+  <view class="list">
+    <view
+      wx:for="{{items}}"
+      wx:key="id"
+      class="row {{dragIndex===index?'row-drag':''}} {{targetIndex===index && dragIndex!==index?'row-target':''}}"
+      style="{{dragIndex===index?('transform:translateY(' + dragY + 'px);z-index:10;'):''}}"
+    >
+      <view class="idx">{{index+1}}</view>
+      <input class="ipt" placeholder="系列名称" value="{{item.name}}" data-i="{{index}}" bindinput="onNameInput" />
+      <view class="btn-del" data-i="{{index}}" bindtap="onRemove">删除</view>
+      <view
+        class="handle"
+        data-i="{{index}}"
+        catchtouchstart="onDragStart"
+        catchtouchmove="onDragMove"
+        catchtouchend="onDragEnd"
+        catchtouchcancel="onDragEnd"
+      >≡</view>
+    </view>
+  </view>
+
+  <view class="btn-add" bindtap="onAdd">+ 新增系列</view>
+
+  <view class="actions">
+    <view class="btn primary {{submitting ? 'disabled' : ''}}" bindtap="onSave">
+      {{submitting ? '保存中...' : '保存'}}
+    </view>
+  </view>
+</view>

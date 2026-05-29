@@ -5,6 +5,7 @@
   overflow: hidden;
   margin-bottom: 32rpx;
   box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.04);
+  position: relative;
 }
 .pcard .cover {
   position: relative;
@@ -36,26 +37,27 @@
   border-radius: 12rpx;
 }
 .pcard .op-btn.op-del { background: #ffebe5; color: #d23900; }
-.pcard .body { padding: 32rpx; }
-.pcard .title { font-size: 36rpx; color: #002045; font-weight: 600; }
+.pcard .body {
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pcard .title {
+  width: 100%;
+  text-align: center;
+  font-size: 36rpx;
+  color: #002045;
+  font-weight: 600;
+  padding: 32rpx 0;
+  background: #ffffff80;
+}
 .pcard .meta {
   margin-top: 16rpx;
   display: flex; gap: 32rpx;
   font-size: 22rpx; color: #43474E;
   font-family: Menlo, monospace;
-}
-.pcard .footer {
-  margin-top: 24rpx;
-  padding-top: 24rpx;
-  border-top: 2rpx solid rgba(196,198,207,0.3);
-  display: flex; justify-content: space-between; align-items: center;
-}
-.pcard .lab { font-size: 22rpx; color: #43474E; }
-.pcard .sub { font-size: 28rpx; color: #002045; margin-top: 6rpx; }
-.pcard .btn-inquiry {
-  background: #F26522; color: #fff;
-  padding: 18rpx 40rpx;
-  border-radius: 16rpx;
-  font-size: 28rpx;
-  font-weight: 600;
 }

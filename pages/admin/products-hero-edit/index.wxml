@@ -1,0 +1,27 @@
+<view class="hero-edit">
+  <view class="section">
+    <view class="sec-title">头图（1 张）</view>
+    <view class="sec-desc">建议比例 16:9；不上传时使用默认占位图</view>
+    <upload-image value="{{form.heroCover}}" multiple="{{false}}" max="{{1}}" dir="hero"
+                  bind:change="onCoverChange"/>
+  </view>
+
+  <view class="section">
+    <view class="sec-title">主标题</view>
+    <input class="ipt" placeholder="例如：数字化展厅"
+           value="{{form.title}}" data-k="title" bindinput="onFieldInput" maxlength="20"/>
+  </view>
+
+  <view class="section">
+    <view class="sec-title">副标题</view>
+    <textarea class="ta" placeholder="例如：探索领先的工业级隔断铝型材与空间系统"
+              value="{{form.subtitle}}" data-k="subtitle" bindinput="onFieldInput"
+              auto-height maxlength="80"/>
+  </view>
+
+  <view class="actions">
+    <view class="btn primary {{submitting ? 'disabled' : ''}}" bindtap="onSave">
+      {{submitting ? '保存中...' : '保存'}}
+    </view>
+  </view>
+</view>

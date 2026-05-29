@@ -24,9 +24,12 @@ Component({
       this._emit(next);
     },
     onInput(e) {
-      const { i, k } = e.currentTarget.dataset;
+      const i = e.currentTarget.dataset.i;
+      const k = e.currentTarget.dataset.k;
       const next = this.data.items.slice();
-      next[i] = Object.assign({}, next[i], { [k]: e.detail.value });
+      const patch = {};
+      patch[k] = e.detail.value;
+      next[i] = Object.assign({}, next[i], patch);
       this.setData({ items: next });
       this._emit(next);
     }

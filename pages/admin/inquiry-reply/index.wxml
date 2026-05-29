@@ -17,15 +17,17 @@
     <view wx:if="{{item.remark}}" class="kv v"><text class="k">备注</text><text class="v">{{item.remark}}</text></view>
   </view>
 
-  <view wx:if="{{item.reply && item.reply.content}}">
+  <view wx:if="{{replies.length}}">
     <section-title title="历史回复"/>
     <view class="card history">
-      <view class="h-time">{{item.reply.timeText}}</view>
-      <view class="h-content">{{item.reply.content}}</view>
+      <view wx:for="{{replies}}" wx:key="index" class="h-item">
+        <view class="h-time">{{item.timeText}}</view>
+        <view class="h-content">{{item.content}}</view>
+      </view>
     </view>
   </view>
 
-  <section-title title="{{item.reply && item.reply.content ? '更新回复' : '回复客户'}}"/>
+  <section-title title="{{replies.length ? '继续回复' : '回复客户'}}"/>
   <view class="card">
     <textarea class="ta" value="{{replyText}}" bindinput="onReplyInput"
               placeholder="请输入回复内容，可包含报价信息、方案建议等..." auto-height/>

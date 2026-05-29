@@ -32,7 +32,7 @@ Page({
   onAdminProducts() { wx.navigateTo({ url: '/pages/admin/products-manage/index' }); },
   onAdminCases() { wx.navigateTo({ url: '/pages/admin/cases-manage/index' }); },
   onAdminInquiry() { wx.navigateTo({ url: '/pages/admin/inquiry-manage/index' }); },
-  onAdminHome() { wx.navigateTo({ url: '/pages/admin/home-edit/index' }); },
+  onAdminContent() { wx.navigateTo({ url: '/pages/admin/content/index' }); },
   onLogout() {
     wx.showModal({
       title: '退出登录', content: '确定要退出登录吗？',

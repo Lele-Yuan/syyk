@@ -1,10 +1,21 @@
+const { getAboutConfig, ABOUT_DEFAULT } = require('../../utils/db.js');
+const { navigateToOffice } = require('../../utils/nav.js');
+
 Page({
   data: {
-    offices: [
-      { city: '沈阳总部', addr: '沈阳市浑南区火炬路12号科技大厦', phone: '024-88886666' },
-      { city: '大连分公司', addr: '大连市中山区人民路88号', phone: '0411-88886666' }
-    ]
+    intro: ABOUT_DEFAULT.intro,
+    offices: ABOUT_DEFAULT.offices.slice()
   },
-  onCall(e) { wx.makePhoneCall({ phoneNumber: e.currentTarget.dataset.phone, fail() {} }); },
-  onCopy(e) { wx.setClipboardData({ data: e.currentTarget.dataset.text }); }
+  async onShow() {
+    try {
+      const cfg = await getAboutConfig();
+      this.setData({ intro: cfg.intro, offices: cfg.offices });
+    } catch (e) {}
+  },
+  onCall(e) { wx.makePhoneCall({ phoneNumber: e.currentTarget.dataset.phone, fail: function () {} }); },
+  onNavAddr(e) {
+    const i = e.currentTarget.dataset.i;
+    navigateToOffice(this.data.offices[i]);
+  }
 });
+

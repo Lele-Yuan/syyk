@@ -1,0 +1,24 @@
+.page { padding: 24rpx 24rpx 180rpx; background: #f6f7fb; min-height: 100vh; }
+.hint { color: #999; font-size: 24rpx; margin-bottom: 16rpx; }
+.list { display: flex; flex-direction: column; gap: 24rpx; }
+.card { background: #fff; border-radius: 16rpx; padding: 24rpx; }
+.card-title { font-size: 28rpx; color: #002045; font-weight: 600; margin-bottom: 16rpx; }
+.row {
+  display: flex; align-items: center; padding: 16rpx 0;
+  border-top: 2rpx solid #f1f4f6; font-size: 28rpx;
+}
+.row:nth-of-type(2) { border-top: 0; }
+.lab { width: 140rpx; color: #67717E; flex-shrink: 0; }
+.ipt { flex: 1; color: #181C1E; }
+.pick-val { color: #181C1E; font-size: 28rpx; padding: 4rpx 0; }
+.actions {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  padding: 20rpx 24rpx; background: #fff;
+  box-shadow: 0 -2rpx 12rpx rgba(0,0,0,.06);
+}
+.btn {
+  height: 88rpx; line-height: 88rpx; text-align: center;
+  border-radius: 44rpx; font-size: 30rpx;
+}
+.btn.primary { background: #A63B00; color: #fff; }
+.btn.primary.disabled { opacity: .6; }

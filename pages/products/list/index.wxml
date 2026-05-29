@@ -1,13 +1,12 @@
 <view class="prd-list">
   <!-- Banner -->
   <view class="hero">
-    <image src="/images/default-cover.png" mode="aspectFill" class="hero-img"/>
-    <view class="hero-tag">100系列 极致全景</view>
+    <image src="{{heroCover}}" mode="aspectFill" class="hero-img" binderror="onHeroError"/>
   </view>
 
   <view class="page-wrap">
-    <view class="title">数字化展厅</view>
-    <view class="subtitle">探索领先的工业级隔断铝型材与空间系统</view>
+    <view class="title">{{heroTitle}}</view>
+    <view class="subtitle">{{heroSubtitle}}</view>
 
     <!-- 筛选 -->
     <view class="filter-card" bindtap="toggleFilter">

@@ -1,0 +1,40 @@
+.page { padding: 24rpx 24rpx 180rpx; background: #f6f7fb; min-height: 100vh; }
+.hint { color: #999; font-size: 24rpx; margin-bottom: 16rpx; }
+.list { background: #fff; border-radius: 16rpx; overflow: hidden; }
+.row {
+  display: flex; align-items: center; padding: 20rpx 16rpx;
+  border-bottom: 1rpx solid #f0f0f5; background: #fff;
+  transition: background 0.15s;
+}
+.row:last-child { border-bottom: none; }
+.row-drag { background: #eef4ff; box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.12); }
+.row-target { background: #fff8e1; }
+.idx { width: 56rpx; color: #999; font-size: 24rpx; text-align: center; }
+.ipt {
+  flex: 1; padding: 12rpx 16rpx; background: #f6f7fb;
+  border-radius: 8rpx; font-size: 28rpx;
+}
+.btn-del {
+  margin: 0 12rpx; padding: 8rpx 16rpx; color: #e53935;
+  border: 1rpx solid #e53935; border-radius: 8rpx; font-size: 24rpx;
+}
+.handle {
+  width: 64rpx; height: 64rpx; line-height: 56rpx; text-align: center;
+  font-size: 40rpx; color: #888; background: #f0f0f5; border-radius: 8rpx;
+}
+.btn-add {
+  margin-top: 24rpx; padding: 24rpx; text-align: center;
+  background: #fff; border: 1rpx dashed #b3c4ff; color: #4a6cf7;
+  border-radius: 16rpx; font-size: 28rpx;
+}
+.actions {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  padding: 20rpx 24rpx; background: #fff;
+  box-shadow: 0 -2rpx 12rpx rgba(0,0,0,.06);
+}
+.btn {
+  height: 88rpx; line-height: 88rpx; text-align: center;
+  border-radius: 44rpx; font-size: 30rpx;
+}
+.btn.primary { background: #A63B00; color: #fff; }
+.btn.primary.disabled { opacity: .6; }

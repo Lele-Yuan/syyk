@@ -6,6 +6,6 @@ function formatTime(date) {
   return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 function statusLabel(s) {
-  return { pending: '待回复', replied: '已回复', closed: '已关闭' }[s] || s;
+  return { pending: '待回复', completed: '已回复', replied: '已回复', closed: '已关闭' }[s] || s;
 }
 module.exports = { formatTime, statusLabel };

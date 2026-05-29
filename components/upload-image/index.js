@@ -22,15 +22,17 @@ Component({
       const remain = this.data.multiple ? this.data.max - this.data.fileIDs.length : 1;
       if (remain <= 0) return wx.showToast({ title: '已达上限', icon: 'none' });
       try {
-        const { tempFiles } = await wx.chooseMedia({
+        const res = await wx.chooseMedia({
           count: remain, mediaType: ['image'], sizeType: ['compressed']
         });
+        const tempFiles = res.tempFiles || [];
         wx.showLoading({ title: '上传中', mask: true });
         const fids = [];
-        for (const f of tempFiles) {
+        for (let idx = 0; idx < tempFiles.length; idx++) {
+          const f = tempFiles[idx];
           const ext = (f.tempFilePath.split('.').pop() || 'jpg').toLowerCase();
-          const cloudPath = `${this.data.dir}/${Date.now()}-${Math.random().toString(36).slice(2,8)}.${ext}`;
-          const r = await wx.cloud.uploadFile({ cloudPath, filePath: f.tempFilePath });
+          const cloudPath = this.data.dir + '/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.' + ext;
+          const r = await wx.cloud.uploadFile({ cloudPath: cloudPath, filePath: f.tempFilePath });
           fids.push(r.fileID);
         }
         wx.hideLoading();

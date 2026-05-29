@@ -18,7 +18,7 @@
       </view>
       <view class="area">
         <view class="lab">AREA</view>
-        <view class="val">{{item.area || '—'}}</view>
+        <view class="val">{{item.area || '—'}}㎡</view>
       </view>
     </view>
     <view wx:if="{{item.tags && item.tags.length}}" class="tags">

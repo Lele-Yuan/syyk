@@ -12,7 +12,12 @@
     <view class="row"><text class="lab">项目地址</text><input class="ipt" data-k="location" value="{{form.location}}" bindinput="onInput"/></view>
     <view class="row"><text class="lab">面积(㎡)</text><input class="ipt" data-k="area" type="digit" value="{{form.area}}" bindinput="onInput"/></view>
     <view class="row"><text class="lab">工期</text><input class="ipt" data-k="duration" value="{{form.duration}}" bindinput="onInput" placeholder="如：30天"/></view>
-    <view class="row"><text class="lab">主要型材</text><input class="ipt" data-k="mainMaterial" value="{{form.mainMaterial}}" bindinput="onInput"/></view>
+    <view class="row">
+      <text class="lab">型材系列</text>
+      <picker class="series-pick" mode="selector" range="{{seriesOpts}}" value="{{seriesIdx>=0?seriesIdx:0}}" bindchange="onSeriesPick" disabled="{{!seriesOpts.length}}">
+        <view class="series-btn">{{seriesIdx>=0 ? seriesOpts[seriesIdx] : (seriesOpts.length ? '请选择系列 ▾' : '暂无可选系列，请先在系列管理中配置')}}</view>
+      </picker>
+    </view>
     <view class="row"><text class="lab">难点</text><input class="ipt" data-k="difficulty" value="{{form.difficulty}}" bindinput="onInput"/></view>
     <view class="row"><text class="lab">标签</text><input class="ipt" data-k="tags" value="{{form.tags}}" bindinput="onInput" placeholder="逗号分隔"/></view>
   </view>

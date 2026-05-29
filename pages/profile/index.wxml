@@ -21,8 +21,8 @@
 
     <view wx:if="{{isAdmin}}" class="group">
       <view class="g-title">管理员中心</view>
-      <view class="row" bindtap="onAdminHome">
-        <text class="r-ic">🖼️</text><text class="r-lab">首页内容管理</text><text class="r-arrow">›</text>
+      <view class="row" bindtap="onAdminContent">
+        <text class="r-ic">🗂️</text><text class="r-lab">内容管理</text><text class="r-arrow">›</text>
       </view>
       <view class="row" bindtap="onAdminProducts">
         <text class="r-ic">🧩</text><text class="r-lab">铝型材管理</text><text class="r-arrow">›</text>

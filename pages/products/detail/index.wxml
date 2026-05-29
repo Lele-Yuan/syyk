@@ -21,8 +21,7 @@
     <!-- 三大卖点 -->
     <view wx:if="{{product.features && product.features.length}}" class="features">
       <view wx:for="{{product.features}}" wx:key="title" class="f-card">
-        <view class="f-ic">{{item.icon || '✦'}}</view>
-        <view class="f-title">{{item.title}}</view>
+        <view class="f-title">{{item.icon || '✦'}} {{item.title}}</view>
         <view class="f-desc">{{item.desc}}</view>
       </view>
     </view>
@@ -49,12 +48,12 @@
     </view>
 
     <!-- 配套案例 -->
-    <section-title title="配套工程案例" extra="查看全部"/>
+    <section-title title="配套工程案例" extra-en="VIEW MORE"/>
     <scroll-view scroll-x class="cs-scroll" enhanced show-scrollbar="{{false}}">
       <view wx:for="{{relatedCases}}" wx:key="_id" class="cs-item" data-id="{{item._id}}" bindtap="onCase">
         <image src="{{item.cover}}" mode="aspectFill" class="cs-img"/>
         <view class="cs-title">{{item.title}}</view>
-        <view class="cs-sub">{{product.series || ''}} · {{item.area || ''}}</view>
+        <view class="cs-sub">{{item.location || '沈阳'}} · {{item.area + '㎡' || ''}}</view>
       </view>
     </scroll-view>
   </view>

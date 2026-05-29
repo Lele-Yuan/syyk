@@ -9,17 +9,15 @@
 
   <view class="page-wrap">
     <section-title title="关于银科" extra-en="ABOUT US"/>
-    <view class="card intro">
-      银科 12 年深耕东北建筑装饰行业，专注于工业级铝合金隔断、双玻百叶系统、医用级抗震隔断的研发与施工。累计交付超 1,000,000+ ㎡ 项目，服务包括科技独角兽企业、三甲医院、知名商业地产等行业标杆客户。
-    </view>
+    <view class="card intro">{{intro}}</view>
 
     <section-title title="办公地址"/>
     <view wx:for="{{offices}}" wx:key="city" class="card office">
       <view class="o-city">{{item.city}}</view>
-      <view class="o-row" data-text="{{item.addr}}" bindtap="onCopy">
-        <text class="o-ic">📍</text><text class="o-val">{{item.addr}}</text>
+      <view class="o-row" data-i="{{index}}" bindtap="onNavAddr">
+        <text class="o-ic">📍</text><text class="o-val o-phone">{{item.addr}}</text>
       </view>
-      <view class="o-row" data-phone="{{item.phone}}" bindtap="onCall">
+      <view wx:if="{{item.phone}}" class="o-row" data-phone="{{item.phone}}" bindtap="onCall">
         <text class="o-ic">📞</text><text class="o-val o-phone">{{item.phone}}</text>
       </view>
     </view>

@@ -14,7 +14,14 @@
     "pages/admin/product-edit/index",
     "pages/admin/case-edit/index",
     "pages/admin/inquiry-manage/index",
-    "pages/admin/inquiry-reply/index"
+    "pages/admin/inquiry-reply/index",
+    "pages/admin/home-edit/index",
+    "pages/admin/content/index",
+    "pages/admin/about-edit/index",
+    "pages/admin/products-hero-edit/index",
+    "pages/admin/cases-hero-edit/index",
+    "pages/admin/series-edit/index",
+    "pages/admin/service-edit/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -36,7 +43,7 @@
       },
       {
         "pagePath": "pages/products/list/index",
-        "text": "展厅",
+        "text": "库房",
         "iconPath": "images/footer-icon-02.png",
         "selectedIconPath": "images/footer-icon-02-active.png"
       },
@@ -61,5 +68,10 @@
     ]
   },
   "sitemapLocation": "sitemap.json",
-  "style": "v2"
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "permission": {
+    "scope.userLocation": { "desc": "用于查看办公地址在地图中的位置" }
+  },
+  "requiredPrivateInfos": ["chooseLocation", "getLocation"]
 }

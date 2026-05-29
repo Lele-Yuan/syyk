@@ -24,6 +24,12 @@
            value="{{form.subtitle}}" data-k="subtitle" bindinput="onFieldInput" maxlength="40"/>
   </view>
 
+  <view class="section">
+    <view class="sec-title">Slogan（底部 CTA 描述）</view>
+    <input class="ipt" placeholder="例如：12年深耕，累计交付面积超过 1,000,000+ ㎡"
+           value="{{form.slogan}}" data-k="slogan" bindinput="onFieldInput" maxlength="60"/>
+  </view>
+
   <view class="actions">
     <view class="btn ghost" bindtap="onResetDefaults">恢复默认文案</view>
     <view class="btn primary {{submitting ? 'disabled' : ''}}" bindtap="onSave">

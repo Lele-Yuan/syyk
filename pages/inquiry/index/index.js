@@ -1,4 +1,4 @@
-const { submitInquiry, listMyInquiries, listProducts } = require('../../../utils/db.js');
+const { submitInquiry, listMyInquiries, listProducts, getSeriesConfig } = require('../../../utils/db.js');
 const { formatTime, statusLabel } = require('../../../utils/format.js');
 
 Page({
@@ -15,20 +15,32 @@ Page({
       seriesIdx: 0,
       remark: ''
     },
-    seriesOpts: ['100系列', 'Y-100 双玻', 'Y-80 全钢', 'Y-120 极简超高', '其他/暂未确定'],
+    seriesOpts: ['双玻', '全钢', '极简超高', '其他/暂未确定'],
     productList: [],
     inquiries: [],
     loading: false
   },
   async onShow() {
     const app = getApp();
+    this.loadSeries();
     if (app.globalData.userInfo) {
-      this.setData({ authed: true });
+      this.setData({ authed: true, showLogin: false });
       this.prefillFromUser(app.globalData.userInfo);
       this.loadData();
     } else {
       this.setData({ authed: false, showLogin: true });
     }
+  },
+  async loadSeries() {
+    try {
+      const cfg = await getSeriesConfig();
+      const names = (cfg.items || []).map(function (it) { return it.name; });
+      if (names.length) {
+        const patch = { seriesOpts: names };
+        if (this.data.form.seriesIdx >= names.length) patch['form.seriesIdx'] = 0;
+        this.setData(patch);
+      }
+    } catch (e) {}
   },
   onLoginSuccess(e) {
     this.setData({ authed: true, showLogin: false });
@@ -48,20 +60,24 @@ Page({
   },
   async loadData() {
     try {
-      const [inquiries, products] = await Promise.all([listMyInquiries(), listProducts()]);
+      const results = await Promise.all([listMyInquiries(), listProducts()]);
+      const inquiries = results[0] || [];
+      const products = results[1] || [];
       this.setData({
-        inquiries: (inquiries || []).map(i => Object.assign({}, i, {
+        inquiries: inquiries.map(i => Object.assign({}, i, {
           createdTxt: formatTime(i.createdAt),
           statusTxt: statusLabel(i.status)
         })),
-        productList: products || []
+        productList: products
       });
     } catch (e) { /* ignore */ }
   },
   onTab(e) { this.setData({ activeTab: e.currentTarget.dataset.k }); },
   onInput(e) {
     const k = e.currentTarget.dataset.k;
-    this.setData({ [`form.${k}`]: e.detail.value });
+    const patch = {};
+    patch['form.' + k] = e.detail.value;
+    this.setData(patch);
   },
   onSeries(e) { this.setData({ 'form.seriesIdx': e.detail.value }); },
   async onSubmit() {
@@ -73,6 +89,7 @@ Page({
     if (!f.area) return wx.showToast({ title: '请填写项目面积', icon: 'none' });
     wx.showLoading({ title: '提交中', mask: true });
     try {
+      const userInfo = wx.getStorageSync('userInfo') || {};
       await submitInquiry({
         projectName: f.projectName,
         userName: f.userName,
@@ -80,7 +97,8 @@ Page({
         address: f.address,
         area: Number(f.area) || f.area,
         series: this.data.seriesOpts[f.seriesIdx],
-        remark: f.remark
+        remark: f.remark,
+        userAvatar: userInfo.avatarUrl || ''
       });
       wx.hideLoading();
       wx.showToast({ title: '提交成功', icon: 'success' });

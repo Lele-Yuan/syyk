@@ -41,10 +41,16 @@ exports.main = async (event) => {
     if (action === 'deleteProduct') { await db.collection('products').doc(id).remove(); return { code: 0 }; }
     if (action === 'deleteCase') { await db.collection('cases').doc(id).remove(); return { code: 0 }; }
     if (action === 'replyInquiry') {
+      const _ = db.command;
+      const item = {
+        content: payload.content,
+        repliedBy: OPENID,
+        repliedAt: new Date()
+      };
       await db.collection('inquiries').doc(id).update({
         data: {
           status: 'replied',
-          reply: { content: payload.content, repliedBy: OPENID, repliedAt: db.serverDate() },
+          replies: _.push([item]),
           updatedAt: db.serverDate()
         }
       });
@@ -61,9 +67,27 @@ exports.main = async (event) => {
       });
       return { code: 0 };
     }
+    if (action === 'upsertSiteConfig') {
+      const SITE_DOCS = ['home', 'about', 'products', 'cases', 'series', 'service'];
+      const docId = payload && payload.docId;
+      if (SITE_DOCS.indexOf(docId) < 0) return { code: 400, msg: '非法 docId' };
+      const data = sanitize(payload.data || {});
+      await db.collection('siteConfig').doc(docId).set({
+        data: Object.assign({}, data, { updatedAt: db.serverDate() })
+      });
+      return { code: 0 };
+    }
     if (action === 'listInquiries') {
-      const where = (payload.status && payload.status !== 'all') ? { status: payload.status } : {};
-      const r = await db.collection('inquiries').where(where).orderBy('createdAt', 'desc').limit(100).get();
+      const _ = db.command;
+      let q = db.collection('inquiries');
+      if (payload.status && payload.status !== 'all') {
+        if (payload.status === 'replied' || payload.status === 'completed') {
+          q = q.where({ status: _.in(['replied', 'completed']) });
+        } else {
+          q = q.where({ status: payload.status });
+        }
+      }
+      const r = await q.orderBy('createdAt', 'desc').limit(100).get();
       return { code: 0, data: r.data };
     }
     return { code: 400, msg: '未知操作' };

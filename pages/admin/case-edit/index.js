@@ -1,5 +1,5 @@
 const { requireAdmin } = require('../../../utils/auth.js');
-const { getCase, adminCall, listProducts } = require('../../../utils/db.js');
+const { getCase, adminCall, listProducts, getSeriesConfig } = require('../../../utils/db.js');
 
 const CATEGORIES = ['办公空间', '医疗教育', '商业零售'];
 
@@ -10,7 +10,7 @@ Page({
     catIdx: 0,
     form: {
       title: '', subtitle: '', category: CATEGORIES[0],
-      location: '', area: '', duration: '', mainMaterial: '',
+      location: '', area: '', duration: '', mainMaterial: '', series: '',
       description: '', difficulty: '',
       cover: '', images: [],
       stats: [],
@@ -20,6 +20,8 @@ Page({
       tags: ''
     },
     products: [],     // 可选铝型材
+    seriesOpts: [],
+    seriesIdx: -1,
     submitting: false
   },
   async onLoad(opts) {
@@ -27,6 +29,7 @@ Page({
     if (!ok) return;
     // 并行加载产品列表
     listProducts().then(list => this.setData({ products: list || [] })).catch(() => {});
+    this.loadSeries();
     if (opts.id) {
       this.setData({ id: opts.id });
       try {
@@ -36,14 +39,39 @@ Page({
         if (!form.testimonial) form.testimonial = this.data.form.testimonial;
         const catIdx = Math.max(0, CATEGORIES.indexOf(form.category));
         this.setData({ form, catIdx });
+        this.syncSeriesIdx();
       } catch (e) {
         wx.showToast({ title: '加载失败', icon: 'none' });
       }
     }
   },
-  onInput(e) { this.setData({ [`form.${e.currentTarget.dataset.k}`]: e.detail.value }); },
+  async loadSeries() {
+    try {
+      const cfg = await getSeriesConfig();
+      const names = (cfg.items || []).map(function (it) { return it.name; });
+      this.setData({ seriesOpts: names });
+      this.syncSeriesIdx();
+    } catch (e) {}
+  },
+  syncSeriesIdx() {
+    const cur = this.data.form.series || '';
+    const idx = (this.data.seriesOpts || []).indexOf(cur);
+    this.setData({ seriesIdx: idx });
+  },
+  onSeriesPick(e) {
+    const idx = Number(e.detail.value);
+    const name = this.data.seriesOpts[idx] || '';
+    this.setData({ seriesIdx: idx, 'form.series': name });
+  },
+  onInput(e) {
+    const patch = {};
+    patch['form.' + e.currentTarget.dataset.k] = e.detail.value;
+    this.setData(patch);
+  },
   onTestimonialInput(e) {
-    this.setData({ [`form.testimonial.${e.currentTarget.dataset.k}`]: e.detail.value });
+    const patch = {};
+    patch['form.testimonial.' + e.currentTarget.dataset.k] = e.detail.value;
+    this.setData(patch);
   },
   onCatChange(e) {
     const idx = e.detail.value;
@@ -87,8 +115,11 @@ Page({
     this.setData({ 'form.materials': next });
   },
   onMaterialFieldInput(e) {
-    const { i, k } = e.currentTarget.dataset;
-    this.setData({ [`form.materials[${i}].${k}`]: e.detail.value });
+    const i = e.currentTarget.dataset.i;
+    const k = e.currentTarget.dataset.k;
+    const patch = {};
+    patch['form.materials[' + i + '].' + k] = e.detail.value;
+    this.setData(patch);
   },
   onRemoveMaterial(e) {
     const i = e.currentTarget.dataset.i;

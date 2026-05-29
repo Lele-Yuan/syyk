@@ -23,6 +23,8 @@
 .v.link { color: #A63B00; }
 
 .history { padding: 24rpx; }
+.h-item { padding: 16rpx 0; border-top: 2rpx solid #f1f4f6; }
+.h-item:first-child { border-top: 0; padding-top: 0; }
 .h-time { font-size: 22rpx; color: #C4C6CF; }
 .h-content { font-size: 28rpx; color: #181C1E; line-height: 1.7; margin-top: 8rpx; }
 

@@ -10,13 +10,16 @@
   <view wx:else class="list">
     <view wx:for="{{list}}" wx:key="_id" class="item"
           data-id="{{item._id}}" bindtap="onItem">
-      <view class="head">
-        <view class="t">{{item.projectName}}</view>
-        <view class="badge st-{{item.status}}">{{item.statusText}}</view>
+      <image wx:if="{{item.userAvatar}}" src="{{item.userAvatar}}" class="avatar" mode="aspectFill"/>
+      <view class="body">
+        <view class="head">
+          <view class="t">{{item.projectName}}</view>
+          <view class="badge st-{{item.status}}">{{item.statusText}}</view>
+        </view>
+        <view class="meta">{{item.userName}} · {{item.phone}}</view>
+        <view class="addr">📍 {{item.address}} · {{item.area}}㎡</view>
+        <view class="time">{{item.timeText}}</view>
       </view>
-      <view class="meta">{{item.userName}} · {{item.phone}}</view>
-      <view class="addr">📍 {{item.address}} · {{item.area}}㎡</view>
-      <view class="time">{{item.timeText}}</view>
     </view>
   </view>
 </view>

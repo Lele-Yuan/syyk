@@ -16,11 +16,13 @@
       <view wx:if="{{item.remark}}" class="row col"><text class="lab">备注</text><text class="val">{{item.remark}}</text></view>
     </view>
 
-    <view wx:if="{{item.reply && item.reply.content}}">
+    <view wx:if="{{replies.length}}">
       <section-title title="管理员回复"/>
       <view class="card reply">
-        <view class="r-content">{{item.reply.content}}</view>
-        <view class="r-time">{{item.repliedTxt}}</view>
+        <view wx:for="{{replies}}" wx:key="index" class="r-item">
+          <view class="r-content">{{item.content}}</view>
+          <view class="r-time">{{item.timeText}}</view>
+        </view>
       </view>
     </view>
     <view wx:elif="{{item.status === 'pending'}}" class="empty-state">管理员尚未回复，请耐心等待</view>

@@ -1,0 +1,14 @@
+.content-mgr { padding: 24rpx; background: #f6f7f9; min-height: 100vh; }
+.hd { padding: 16rpx 8rpx 28rpx; }
+.hd-title { font-size: 40rpx; font-weight: 600; color: #002045; }
+.hd-sub { font-size: 26rpx; color: #888; margin-top: 8rpx; }
+.cards { display: flex; flex-direction: column; gap: 20rpx; }
+.card {
+  display: flex; align-items: center; gap: 20rpx;
+  background: #fff; border-radius: 16rpx; padding: 28rpx;
+}
+.card .ic { font-size: 48rpx; width: 80rpx; text-align: center; }
+.card .info { flex: 1; }
+.card .title { font-size: 30rpx; font-weight: 600; color: #002045; }
+.card .desc { font-size: 24rpx; color: #888; margin-top: 6rpx; }
+.card .arrow { font-size: 36rpx; color: #aaa; }

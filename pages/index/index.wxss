@@ -38,6 +38,36 @@
 .o-city { font-size: 28rpx; color: #002045; font-weight: 600; }
 .o-addr { font-size: 22rpx; color: #67717E; margin-top: 4rpx; }
 
+.about-card {
+  display: flex; gap: 24rpx;
+  background: linear-gradient(135deg, #F1F4F6 0%, #fff 100%);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin: 24rpx 0 48rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,32,69,0.06);
+}
+.ac-left {
+  width: 200rpx; flex-shrink: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 16rpx 0;
+  border-right: 2rpx solid #E6E8ED;
+}
+.ac-logo {
+  width: 120rpx; height: 120rpx; border-radius: 60rpx;
+  background: linear-gradient(135deg, #002045, #1A365D);
+  display: flex; align-items: center; justify-content: center;
+}
+.ac-logo text { font-size: 56rpx; }
+.ac-link { margin-top: 16rpx; font-size: 24rpx; color: #A63B00; font-weight: 600; }
+.ac-right {
+  flex: 1; display: flex; flex-direction: column; gap: 20rpx;
+  justify-content: center;
+}
+.ac-o { line-height: 1.5; }
+.ac-city { font-size: 26rpx; color: #002045; font-weight: 600; }
+.ac-addr { font-size: 22rpx; color: #67717E; margin-top: 4rpx; padding-left: 32rpx; }
+.ac-empty { font-size: 24rpx; color: #C4C6CF; text-align: center; }
+
 .entries {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -81,3 +111,33 @@
   border-radius: 48rpx;
   font-size: 30rpx; font-weight: 600;
 }
+
+.fab-mask {
+  position: fixed; left: 0; right: 0; top: 0; bottom: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 998;
+}
+.fab-overlay {
+  position: fixed; right: 40rpx; bottom: 320rpx;
+  z-index: 1001;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 24rpx;
+  animation: fabIn 0.22s ease-out;
+}
+@keyframes fabIn {
+  from { opacity: 0; transform: translateY(20rpx) scale(0.9); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.fab-agent {
+  display: flex; align-items: center; gap: 16rpx;
+  background: #fff; padding: 16rpx 24rpx 16rpx 16rpx;
+  border-radius: 60rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0,0,0,0.18);
+}
+.fab-avatar {
+  width: 72rpx; height: 72rpx; border-radius: 50%;
+  background: linear-gradient(135deg, #FF9259, #A63B00);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40rpx;
+}
+.fab-name { font-size: 28rpx; font-weight: 600; color: #2A2A2A; }
+.fab-phone { font-size: 24rpx; color: #888; margin-left: 4rpx; }

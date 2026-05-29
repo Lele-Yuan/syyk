@@ -21,8 +21,13 @@ Component({
     _emit(items) {
       const lk = this.data.labelKey;
       const vk = this.data.valueKey;
-      const value = items.map(it => ({ [lk]: it.label, [vk]: it.value }));
-      this.triggerEvent('change', { value });
+      const value = items.map(function (it) {
+        const o = {};
+        o[lk] = it.label;
+        o[vk] = it.value;
+        return o;
+      });
+      this.triggerEvent('change', { value: value });
     },
     onAdd() {
       const next = this.data.items.concat([{ label: '', value: '' }]);
@@ -37,9 +42,12 @@ Component({
       this._emit(next);
     },
     onInput(e) {
-      const { i, k } = e.currentTarget.dataset;
+      const i = e.currentTarget.dataset.i;
+      const k = e.currentTarget.dataset.k;
       const next = this.data.items.slice();
-      next[i] = Object.assign({}, next[i], { [k]: e.detail.value });
+      const patch = {};
+      patch[k] = e.detail.value;
+      next[i] = Object.assign({}, next[i], patch);
       this.setData({ items: next });
       this._emit(next);
     }

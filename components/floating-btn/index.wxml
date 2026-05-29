@@ -1,3 +1,3 @@
-<view class="fab" style="bottom: {{bottom}}rpx" bindtap="onTap">
+<view class="fab" style="bottom: {{bottom}}rpx" catchtap="onTap">
   <text class="ic">{{icon}}</text>
 </view>

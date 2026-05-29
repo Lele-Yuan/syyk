@@ -22,7 +22,7 @@
 .lab { font-size: 26rpx; color: #181C1E; margin-bottom: 12rpx; }
 .req { color: #d23900; margin-left: 6rpx; }
 .ipt {
-  width: 100%;
+  width: initial;
   padding: 24rpx 28rpx;
   border: 2rpx solid #EBEEF0;
   border-radius: 16rpx;

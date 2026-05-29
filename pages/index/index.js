@@ -1,4 +1,5 @@
-const { listProducts, listCases, getHomeConfig, HOME_DEFAULT } = require('../../utils/db.js');
+const { listProducts, listCases, getHomeConfig, getAboutConfig, getServiceConfig, HOME_DEFAULT, ABOUT_DEFAULT } = require('../../utils/db.js');
+const { navigateToOffice } = require('../../utils/nav.js');
 
 Page({
   data: {
@@ -8,34 +9,38 @@ Page({
     homeTag: HOME_DEFAULT.tag,
     homeTitle: HOME_DEFAULT.title,
     homeSubtitle: HOME_DEFAULT.subtitle,
+    homeSlogan: HOME_DEFAULT.slogan,
     bannerIdx: 0,
-    quickEntries: [
-      { icon: '🏛️', label: '数字化展厅', url: '/pages/products/list/index', type: 'tab' },
-      { icon: '🏗️', label: '工程作品', url: '/pages/cases/list/index', type: 'tab' },
-      { icon: '📝', label: '一键询价', url: '/pages/inquiry/index/index', type: 'tab' },
-      { icon: '🏢', label: '关于我们', url: '/pages/about/index', type: 'nav' }
-    ],
-    offices: [
-      { city: '沈阳', addr: '沈阳市浑南区火炬路12号' },
-      { city: '大连', addr: '大连市中山区人民路88号' }
-    ],
+    offices: ABOUT_DEFAULT.offices.slice(),
     cases: [],
-    products: []
+    products: [],
+    agents: [],
+    fabOpen: false
   },
   async onShow() {
     try {
-      const [cfg, cases, products] = await Promise.all([
+      const results = await Promise.all([
         getHomeConfig(),
         listCases('all'),
-        listProducts()
+        listProducts(),
+        getAboutConfig(),
+        getServiceConfig()
       ]);
+      const cfg = results[0] || HOME_DEFAULT;
+      const cases = results[1] || [];
+      const products = results[2] || [];
+      const about = results[3] || ABOUT_DEFAULT;
+      const service = results[4] || { agents: [] };
       this.setData({
         banners: (cfg.banners && cfg.banners.length) ? cfg.banners : HOME_DEFAULT.banners.slice(),
         homeTag: cfg.tag,
         homeTitle: cfg.title,
         homeSubtitle: cfg.subtitle,
-        cases: (cases || []).slice(0, 4),
-        products: (products || []).slice(0, 3)
+        homeSlogan: cfg.slogan,
+        offices: (about.offices && about.offices.length) ? about.offices : ABOUT_DEFAULT.offices.slice(),
+        cases: cases.slice(0, 4),
+        products: products.slice(0, 3),
+        agents: service.agents || []
       });
     } catch (e) { /* 云未初始化时静默 */ }
   },
@@ -59,11 +64,28 @@ Page({
     if (type === 'tab') wx.switchTab({ url });
     else wx.navigateTo({ url });
   },
+  onAbout() {
+    wx.navigateTo({ url: '/pages/about/index' });
+  },
+  onNavAddr(e) {
+    const i = e.currentTarget.dataset.i;
+    navigateToOffice(this.data.offices[i]);
+  },
   onCase(e) {
     wx.navigateTo({ url: '/pages/cases/detail/index?id=' + e.currentTarget.dataset.id });
   },
   onFab() {
-    wx.switchTab({ url: '/pages/inquiry/index/index' });
+    if (this.data.agents && this.data.agents.length) {
+      this.setData({ fabOpen: !this.data.fabOpen });
+    } else {
+      wx.switchTab({ url: '/pages/inquiry/index/index' });
+    }
+  },
+  onCloseFab() { this.setData({ fabOpen: false }); },
+  onCallAgent(e) {
+    const phone = e.currentTarget.dataset.phone;
+    if (!phone) return;
+    wx.makePhoneCall({ phoneNumber: phone, fail: function () {} });
   },
   onCallSy() { wx.makePhoneCall({ phoneNumber: '02488886666', fail() {} }); }
 });

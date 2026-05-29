@@ -1,4 +1,4 @@
-const { listCases } = require('../../../utils/db.js');
+const { listCases, getCasesConfig, getHomeConfig, CASES_DEFAULT, HOME_DEFAULT } = require('../../../utils/db.js');
 
 Page({
   data: {
@@ -10,9 +10,29 @@ Page({
     ],
     activeTab: 'all',
     cases: [],
-    loading: true
+    loading: true,
+    heroTitle: CASES_DEFAULT.title,
+    heroSubtitle: CASES_DEFAULT.subtitle,
+    homeSubtitle: HOME_DEFAULT.subtitle,
+    homeSlogan: HOME_DEFAULT.slogan
   },
-  async onShow() { await this.loadList(); },
+  async onShow() {
+    this.loadHero();
+    await this.loadList();
+  },
+  async loadHero() {
+    try {
+      const results = await Promise.all([getCasesConfig(), getHomeConfig()]);
+      const caseCfg = results[0];
+      const homeCfg = results[1];
+      this.setData({
+        heroTitle: caseCfg.title,
+        heroSubtitle: caseCfg.subtitle,
+        homeSubtitle: homeCfg.subtitle,
+        homeSlogan: homeCfg.slogan
+      });
+    } catch (e) {}
+  },
   async loadList() {
     this.setData({ loading: true });
     try {

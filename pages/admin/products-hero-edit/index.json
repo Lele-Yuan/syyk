@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "展厅头图 编辑",
+  "usingComponents": {
+    "upload-image": "/components/upload-image/index"
+  }
+}

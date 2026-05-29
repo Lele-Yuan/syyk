@@ -13,5 +13,7 @@
 .lab { width: 160rpx; color: #67717E; font-size: 26rpx; flex-shrink: 0; }
 .val { flex: 1; color: #181C1E; font-size: 28rpx; word-break: break-all; }
 .reply { padding: 32rpx; background: #F1F4F6; }
+.r-item { padding: 16rpx 0; border-top: 2rpx solid #e6e8ed; }
+.r-item:first-child { border-top: 0; padding-top: 0; }
 .r-content { font-size: 28rpx; color: #181C1E; line-height: 1.7; }
 .r-time { font-size: 22rpx; color: #67717E; margin-top: 16rpx; }

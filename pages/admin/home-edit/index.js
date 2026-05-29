@@ -7,7 +7,8 @@ Page({
       banners: [],
       tag: HOME_DEFAULT.tag,
       title: HOME_DEFAULT.title,
-      subtitle: HOME_DEFAULT.subtitle
+      subtitle: HOME_DEFAULT.subtitle,
+      slogan: HOME_DEFAULT.slogan
     },
     submitting: false
   },
@@ -21,7 +22,8 @@ Page({
           banners: cfg.banners || [],
           tag: cfg.tag,
           title: cfg.title,
-          subtitle: cfg.subtitle
+          subtitle: cfg.subtitle,
+          slogan: cfg.slogan
         }
       });
     } catch (e) {}
@@ -32,7 +34,9 @@ Page({
   },
   onFieldInput(e) {
     const k = e.currentTarget.dataset.k;
-    this.setData({ ['form.' + k]: e.detail.value });
+    const patch = {};
+    patch['form.' + k] = e.detail.value;
+    this.setData(patch);
   },
   async onSave() {
     if (this.data.submitting) return;
@@ -44,11 +48,12 @@ Page({
       banners,
       tag: (f.tag || '').trim() || HOME_DEFAULT.tag,
       title: (f.title || '').trim() || HOME_DEFAULT.title,
-      subtitle: (f.subtitle || '').trim() || HOME_DEFAULT.subtitle
+      subtitle: (f.subtitle || '').trim() || HOME_DEFAULT.subtitle,
+      slogan: (f.slogan || '').trim() || HOME_DEFAULT.slogan
     };
     this.setData({ submitting: true });
     try {
-      const r = await adminCall('upsertHomeConfig', payload);
+      const r = await adminCall('upsertSiteConfig', { docId: 'home', data: payload });
       if (r && r.code === 0) {
         wx.showToast({ title: '已保存' });
         setTimeout(() => wx.navigateBack(), 600);
@@ -70,7 +75,8 @@ Page({
         this.setData({
           'form.tag': HOME_DEFAULT.tag,
           'form.title': HOME_DEFAULT.title,
-          'form.subtitle': HOME_DEFAULT.subtitle
+          'form.subtitle': HOME_DEFAULT.subtitle,
+          'form.slogan': HOME_DEFAULT.slogan
         });
       }
     });

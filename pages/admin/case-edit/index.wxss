@@ -6,6 +6,8 @@
 .lab { width: 160rpx; color: #67717E; flex-shrink: 0; }
 .row.v .lab { width: auto; margin-bottom: 12rpx; }
 .ipt { flex: 1; color: #181C1E; }
+.series-pick { flex: 1; }
+.series-btn { padding: 4rpx 0; color: #181C1E; font-size: 28rpx; }
 .ta { width: 100%; min-height: 200rpx; padding: 16rpx 0; font-size: 28rpx; color: #181C1E; }
 .footer {
   position: fixed; left: 0; right: 0; bottom: 0;

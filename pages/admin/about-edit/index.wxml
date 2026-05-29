@@ -1,0 +1,38 @@
+<view class="about-edit">
+  <view class="section">
+    <view class="sec-title">公司介绍</view>
+    <textarea class="ta" placeholder="输入公司简介"
+              value="{{form.intro}}" bindinput="onIntroInput"
+              auto-height maxlength="500"/>
+  </view>
+
+  <view class="section">
+    <view class="sec-title">办公地点（{{form.offices.length}}）</view>
+    <view wx:for="{{form.offices}}" wx:key="index" class="office-row">
+      <view class="o-head">
+        <text class="o-idx">#{{index + 1}}</text>
+        <view class="o-rm" data-i="{{index}}" bindtap="onRemoveOffice">删除</view>
+      </view>
+      <input class="ipt" placeholder="城市/分公司名（必填）"
+             value="{{item.city}}" data-i="{{index}}" data-k="city"
+             bindinput="onOfficeInput" maxlength="20"/>
+      <input class="ipt" placeholder="详细地址（必填）"
+             value="{{item.addr}}" data-i="{{index}}" data-k="addr"
+             bindinput="onOfficeInput" maxlength="60"/>
+      <input class="ipt" placeholder="联系电话"
+             value="{{item.phone}}" data-i="{{index}}" data-k="phone"
+             bindinput="onOfficeInput" maxlength="20"/>
+      <view class="o-loc-row">
+        <view class="o-loc-btn" data-i="{{index}}" bindtap="onPickLocation">📍 {{item.latitude && item.longitude ? '更新位置坐标' : '设置位置坐标'}}</view>
+        <view wx:if="{{item.latitude && item.longitude}}" class="o-loc-ok">已设置</view>
+      </view>
+    </view>
+    <view class="add-btn" bindtap="onAddOffice">+ 新增办公地点</view>
+  </view>
+
+  <view class="actions">
+    <view class="btn primary {{submitting ? 'disabled' : ''}}" bindtap="onSave">
+      {{submitting ? '保存中...' : '保存'}}
+    </view>
+  </view>
+</view>

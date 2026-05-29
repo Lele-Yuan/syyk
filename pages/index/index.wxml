@@ -18,33 +18,29 @@
 
   <!-- 公司信息 -->
   <view class="page-wrap">
-    <view class="offices">
-      <view wx:for="{{offices}}" wx:key="city" class="o-card">
-        <view class="o-icon">📍</view>
-        <view class="o-info">
-          <view class="o-city">{{item.city}}</view>
-          <view class="o-addr">{{item.addr}}</view>
-        </view>
+    <!-- 关于公司 -->
+    <section-title title="关于公司" extra-en="ABOUT US"/>
+    <view class="about-card">
+      <view class="ac-left" bindtap="onAbout">
+        <view class="ac-logo"><text>🏢</text></view>
+        <view class="ac-link">关于我们 ›</view>
       </view>
-    </view>
-
-    <!-- 功能图标区 -->
-    <section-title title="核心服务" extra-en="CORE SERVICES"/>
-    <view class="entries">
-      <view wx:for="{{quickEntries}}" wx:key="label" class="entry"
-            data-url="{{item.url}}" data-type="{{item.type}}" bindtap="onEntry">
-        <view class="entry-ic"><text>{{item.icon}}</text></view>
-        <view class="entry-lab">{{item.label}}</view>
+      <view class="ac-right">
+        <view wx:for="{{offices}}" wx:key="city" class="ac-o" data-i="{{index}}" bindtap="onNavAddr">
+          <view class="ac-city">📍 {{item.city}}</view>
+          <view class="ac-addr">{{item.addr}}</view>
+        </view>
+        <view wx:if="{{!offices.length}}" class="ac-empty">暂无地址信息</view>
       </view>
     </view>
 
     <!-- 工程案例 -->
-    <section-title title="局部工程案例" extra="查看全部"/>
+    <section-title title="局部工程案例" extra-en="VIEW MORE"/>
     <scroll-view scroll-x class="case-scroll" enhanced show-scrollbar="{{false}}">
       <view wx:for="{{cases}}" wx:key="_id" class="cs-item" data-id="{{item._id}}" bindtap="onCase">
         <image src="{{item.cover || caseFallback}}" mode="aspectFill" class="cs-img" data-i="{{index}}" binderror="onCaseImgError"/>
         <view class="cs-title">{{item.title}}</view>
-        <view class="cs-sub">{{item.location || '沈阳'}} · {{item.area || ''}}</view>
+        <view class="cs-sub">{{item.location || '沈阳'}} · {{item.area || ''}}㎡</view>
       </view>
       <view wx:if="{{!cases.length}}" class="cs-item cs-empty">
         <image src="/images/default-cover.png" mode="aspectFill" class="cs-img"/>
@@ -55,11 +51,19 @@
 
     <!-- 实力卡片 -->
     <view class="brand-card">
-      <view class="bc-title">东北市场领导品牌</view>
-      <view class="bc-sub">12年深耕，累计交付面积超过 1,000,000+ ㎡</view>
+      <view class="bc-title">{{homeSubtitle}}</view>
+      <view class="bc-sub">{{homeSlogan}}</view>
       <view class="bc-btn" bindtap="onFab">立即获取报价方案</view>
     </view>
   </view>
 
-  <floating-btn icon="💬" bottom="{{200}}" bindtap="onFab"/>
+  <view wx:if="{{fabOpen && agents.length}}" class="fab-overlay">
+    <view class="fab-agent" wx:for="{{agents}}" wx:key="phone" data-phone="{{item.phone}}" catchtap="onCallAgent">
+      <view class="fab-avatar">{{item.gender === 'female' ? '👩‍💼' : '👨‍💼'}}</view>
+      <view class="fab-name">{{item.name}}</view>
+      <view class="fab-phone">{{item.phone}}</view>
+    </view>
+  </view>
+
+  <floating-btn icon="{{fabOpen ? '✕' : '💬'}}" bottom="{{200}}" bindtap="onFab"/>
 </view>

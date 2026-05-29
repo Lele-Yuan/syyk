@@ -11,10 +11,18 @@
 
   <view class="page-wrap">
     <!-- 数据三栏 -->
-    <view wx:if="{{caseInfo.stats && caseInfo.stats.length}}" class="stats">
-      <view wx:for="{{caseInfo.stats}}" wx:key="label" class="st">
-        <view class="st-v">{{item.value}}</view>
-        <view class="st-l">{{item.label}}</view>
+    <view class="stats">
+      <view class="st">
+        <view class="st-v">{{caseInfo.area ? caseInfo.area + '㎡' : '—'}}</view>
+        <view class="st-l">施工面积</view>
+      </view>
+      <view class="st">
+        <view class="st-v">{{caseInfo.duration + '天' || '—'}}</view>
+        <view class="st-l">工期</view>
+      </view>
+      <view class="st">
+        <view class="st-v">{{caseInfo.series || caseInfo.mainMaterial || '—'}}</view>
+        <view class="st-l">型材系列</view>
       </view>
     </view>
 
@@ -77,15 +85,15 @@
     <view wx:if="{{caseInfo.testimonial && caseInfo.testimonial.content}}" class="testi">
       <view class="t-head">
         <view class="t-avt">{{caseInfo.testimonial.name && caseInfo.testimonial.name.charAt ? caseInfo.testimonial.name.charAt(0) : '客'}}</view>
-        <view>
+        <view class="t-info">
           <view class="t-name">项目负责人：{{caseInfo.testimonial.name}}</view>
           <view class="t-role">{{caseInfo.testimonial.role}}</view>
         </view>
+        <view class="t-stars">
+          <text wx:for="{{[1,2,3,4,5]}}" wx:key="*this">{{ index < (caseInfo.testimonial.rating || 5) ? '★' : '☆' }}</text>
+        </view>
       </view>
       <view class="t-quote">"{{caseInfo.testimonial.content}}"</view>
-      <view class="t-stars">
-        <text wx:for="{{[1,2,3,4,5]}}" wx:key="*this">{{ index < (caseInfo.testimonial.rating || 5) ? '★' : '☆' }}</text>
-      </view>
     </view>
   </view>
 

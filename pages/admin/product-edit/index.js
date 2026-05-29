@@ -38,11 +38,16 @@ Page({
   },
   onInput(e) {
     const k = e.currentTarget.dataset.k;
-    this.setData({ [`form.${k}`]: e.detail.value });
+    const patch = {};
+    patch['form.' + k] = e.detail.value;
+    this.setData(patch);
   },
   onFeatureInput(e) {
-    const { idx, k } = e.currentTarget.dataset;
-    this.setData({ [`form.features[${idx}].${k}`]: e.detail.value });
+    const idx = e.currentTarget.dataset.idx;
+    const k = e.currentTarget.dataset.k;
+    const patch = {};
+    patch['form.features[' + idx + '].' + k] = e.detail.value;
+    this.setData(patch);
   },
   onCoverChange(e) {
     const v = e.detail.value;

@@ -2,8 +2,8 @@
   <view class="page-wrap">
     <view class="hd">
       <view class="hd-en">PROJECT SHOWCASE</view>
-      <view class="hd-title">工程作品</view>
-      <view class="hd-sub">扎根东北，服务全国。以工业精度定义建筑之美，通过真实案例见证银科实力。</view>
+      <view class="hd-title">{{heroTitle}}</view>
+      <view class="hd-sub">{{heroSubtitle}}</view>
     </view>
 
     <scroll-view scroll-x class="tabs" enhanced show-scrollbar="{{false}}">
@@ -20,8 +20,8 @@
     <!-- CTA -->
     <view class="brand-card">
       <view class="bc-icon">🏆</view>
-      <view class="bc-title">东北市场领导品牌</view>
-      <view class="bc-sub">12年深耕，累计交付面积超过 1,000,000+ ㎡</view>
+      <view class="bc-title">{{homeSubtitle}}</view>
+      <view class="bc-sub">{{homeSlogan}}</view>
       <view class="bc-btn" bindtap="onInquiry">立即获取报价方案</view>
     </view>
   </view>

@@ -1,0 +1,29 @@
+<view class="page">
+  <view class="hint">点击首页右下角浮动球可弹出以下客服联系方式</view>
+
+  <view class="list">
+    <view wx:for="{{agents}}" wx:key="index" class="card">
+      <view class="card-title">客服 {{index + 1}}</view>
+      <view class="row">
+        <text class="lab">性别</text>
+        <picker class="ipt" mode="selector" range="{{genderLabels}}" value="{{item.genderIdx}}" data-i="{{index}}" bindchange="onGender">
+          <view class="pick-val">{{genderLabels[item.genderIdx]}} {{item.gender === 'female' ? '👩‍💼' : '👨‍💼'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <text class="lab">称呼</text>
+        <input class="ipt" placeholder="如：苑经理" data-i="{{index}}" data-k="name" value="{{item.name}}" bindinput="onInput" maxlength="10"/>
+      </view>
+      <view class="row">
+        <text class="lab">手机号</text>
+        <input class="ipt" type="number" placeholder="11位手机号" data-i="{{index}}" data-k="phone" value="{{item.phone}}" bindinput="onInput" maxlength="11"/>
+      </view>
+    </view>
+  </view>
+
+  <view class="actions">
+    <view class="btn primary {{submitting ? 'disabled' : ''}}" bindtap="onSave">
+      {{submitting ? '保存中...' : '保存'}}
+    </view>
+  </view>
+</view>
