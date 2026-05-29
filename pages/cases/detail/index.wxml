@@ -12,12 +12,12 @@
   <view class="page-wrap">
     <!-- 数据三栏 -->
     <view class="stats">
-      <view class="st">
-        <view class="st-v">{{caseInfo.area ? caseInfo.area + '㎡' : '—'}}</view>
+      <view class="st" wx:if="{{caseInfo.area}}">
+        <view class="st-v">{{caseInfo.area}}㎡</view>
         <view class="st-l">施工面积</view>
       </view>
-      <view class="st">
-        <view class="st-v">{{caseInfo.duration + '天' || '—'}}</view>
+      <view class="st" wx:if="{{caseInfo.duration}}">
+        <view class="st-v">{{caseInfo.duration}}天</view>
         <view class="st-l">工期</view>
       </view>
       <view class="st">

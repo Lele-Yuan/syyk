@@ -40,7 +40,6 @@
       <view wx:for="{{cases}}" wx:key="_id" class="cs-item" data-id="{{item._id}}" bindtap="onCase">
         <image src="{{item.cover || caseFallback}}" mode="aspectFill" class="cs-img" data-i="{{index}}" binderror="onCaseImgError"/>
         <view class="cs-title">{{item.title}}</view>
-        <view class="cs-sub">{{item.location || '沈阳'}} · {{item.area || ''}}㎡</view>
       </view>
       <view wx:if="{{!cases.length}}" class="cs-item cs-empty">
         <image src="/images/default-cover.png" mode="aspectFill" class="cs-img"/>

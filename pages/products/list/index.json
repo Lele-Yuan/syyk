@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "数字化展厅",
+  "navigationBarTitleText": "数字化库房",
   "usingComponents": {
     "section-title": "/components/section-title/index",
     "product-card": "/components/product-card/index",

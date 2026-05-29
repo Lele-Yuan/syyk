@@ -38,6 +38,11 @@
 }
 .f-lab { width: 160rpx; font-size: 26rpx; color: #43474E; }
 .f-val { flex: 1; text-align: right; font-size: 26rpx; color: #002045; }
+.f-keyword-input {
+  flex: 1; font-size: 28rpx; color: #002045;
+  background: #F5F7FA; border-radius: 12rpx;
+  padding: 16rpx 24rpx; width: 100%;
+}
 .f-actions { display: flex; gap: 16rpx; margin-top: 16rpx; }
 .f-btn {
   flex: 1; text-align: center; padding: 20rpx;

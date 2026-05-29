@@ -22,7 +22,7 @@
 .group {
   background: #fff;
   border-radius: 24rpx;
-  margin-top: 32rpx;
+  margin-bottom: 32rpx;
   overflow: hidden;
 }
 .g-title { padding: 24rpx 32rpx 8rpx; font-size: 26rpx; color: #67717E; }
@@ -34,6 +34,13 @@
 }
 .r-ic { width: 56rpx; font-size: 32rpx; }
 .r-lab { flex: 1; }
+.r-badge {
+  min-width: 36rpx; height: 36rpx; line-height: 36rpx;
+  background: #d23b3b; color: #fff;
+  border-radius: 18rpx; font-size: 22rpx;
+  text-align: center; padding: 0 8rpx;
+  margin-right: 12rpx;
+}
 .r-arrow { color: #C4C6CF; font-size: 32rpx; }
 
 .logout {

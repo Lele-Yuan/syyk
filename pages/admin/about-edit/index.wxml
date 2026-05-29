@@ -30,6 +30,16 @@
     <view class="add-btn" bindtap="onAddOffice">+ 新增办公地点</view>
   </view>
 
+  <view class="section">
+    <view class="sec-title">企业资质（{{form.qualifications.length}}）</view>
+    <view wx:for="{{form.qualifications}}" wx:key="index" class="qua-row">
+      <input class="ipt qua-ipt" placeholder="输入资质名称"
+             value="{{item}}" data-i="{{index}}" bindinput="onQuaInput" maxlength="60"/>
+      <view class="o-rm" data-i="{{index}}" bindtap="onRemoveQua">删除</view>
+    </view>
+    <view class="add-btn" bindtap="onAddQua">+ 新增资质</view>
+  </view>
+
   <view class="actions">
     <view class="btn primary {{submitting ? 'disabled' : ''}}" bindtap="onSave">
       {{submitting ? '保存中...' : '保存'}}

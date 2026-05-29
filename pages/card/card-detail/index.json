@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "login-mask": "/components/login-mask/index"
+  },
+  "navigationBarTitleText": "名片详情",
+  "navigationBarBackgroundColor": "#002045",
+  "navigationBarTextStyle": "white"
+}

@@ -14,6 +14,12 @@ const ABOUT_DEFAULT = {
   offices: [
     { city: '沈阳总部', addr: '沈阳市浑南区火炬路12号科技大厦', phone: '024-88886666' },
     { city: '大连分公司', addr: '大连市中山区人民路88号', phone: '0411-88886666' }
+  ],
+  qualifications: [
+    '建筑装饰装修工程专业承包二级',
+    'ISO 9001 质量管理体系认证',
+    '国家高新技术企业',
+    'AAA 级信用企业'
   ]
 };
 
@@ -70,7 +76,8 @@ async function getAboutConfig() {
   const cfg = await getSiteConfig('about', ABOUT_DEFAULT);
   return {
     intro: cfg.intro || ABOUT_DEFAULT.intro,
-    offices: (cfg.offices && cfg.offices.length) ? cfg.offices : ABOUT_DEFAULT.offices
+    offices: (cfg.offices && cfg.offices.length) ? cfg.offices : ABOUT_DEFAULT.offices,
+    qualifications: (cfg.qualifications && cfg.qualifications.length) ? cfg.qualifications : ABOUT_DEFAULT.qualifications
   };
 }
 
@@ -103,10 +110,8 @@ async function getServiceConfig() {
   return { agents: list };
 }
 
-async function listProducts(filters = {}) {
-  const where = {};
-  ['material', 'fireRating', 'surface'].forEach(k => { if (filters[k]) where[k] = filters[k]; });
-  const r = await db().collection('products').where(where).orderBy('createdAt', 'desc').limit(50).get();
+async function listProducts() {
+  const r = await db().collection('products').orderBy('createdAt', 'desc').limit(50).get();
   return r.data;
 }
 async function getProduct(id) {
@@ -139,15 +144,83 @@ async function getInquiry(id) {
   const r = await db().collection('inquiries').doc(id).get();
   return r.data;
 }
-async function adminCall(action, payload, id) {
-  const r = await wx.cloud.callFunction({ name: 'adminAction', data: { action: action, payload: payload, id: id } });
+// ── 名片夹 ──────────────────────────────────────
+async function listMyCards() {
+  var openid = (getApp().globalData.userInfo || {})._openid;
+  var col = db().collection('businessCards');
+  if (openid) {
+    col = col.where({ _openid: openid });
+  }
+  const r = await col.orderBy('createdAt', 'desc').get();
+  return r.data;
+}
+async function getCard(id) {
+  const r = await db().collection('businessCards').doc(id).get();
+  return r.data;
+}
+async function createCard(data) {
+  return db().collection('businessCards').add({
+    data: Object.assign({}, data, {
+      createdAt: db().serverDate(),
+      updatedAt: db().serverDate()
+    })
+  });
+}
+async function updateCard(id, data) {
+  return db().collection('businessCards').doc(id).update({
+    data: Object.assign({}, data, { updatedAt: db().serverDate() })
+  });
+}
+async function deleteCard(id) {
+  return db().collection('businessCards').doc(id).remove();
+}
+async function listContacts() {
+  const r = await db().collection('contacts').orderBy('savedAt', 'desc').get();
+  return r.data;
+}
+async function saveContact(card, remark) {
+  return db().collection('contacts').add({
+    data: {
+      cardId: card._id,
+      snapshot: {
+        name: card.name || '',
+        title: card.title || '',
+        titleEn: card.titleEn || '',
+        phone: card.phone || '',
+        email: card.email || '',
+        address: card.address || '',
+        specialties: card.specialties || [],
+        businessAreas: card.businessAreas || [],
+        avatarUrl: card.avatarUrl || ''
+      },
+      remark: remark || '',
+      savedAt: db().serverDate()
+    }
+  });
+}
+async function isCardSaved(cardId) {
+  const r = await db().collection('contacts').where({ cardId: cardId }).get();
+  return !!(r.data && r.data.length);
+}
+async function deleteContact(id) {
+  return db().collection('contacts').doc(id).remove();
+}
+
+async function countPendingInquiries() {
+  const r = await db().collection('inquiries').where({ status: 'pending' }).count();
+  return r.total || 0;
+}
+
+async function adminCall(action, payload, id) {  const r = await wx.cloud.callFunction({ name: 'adminAction', data: { action: action, payload: payload, id: id } });
   return r.result;
 }
 
 module.exports = {
   db, listProducts, getProduct, listCases, getCase,
-  submitInquiry, listMyInquiries, getInquiry, adminCall,
+  submitInquiry, listMyInquiries, getInquiry, countPendingInquiries, adminCall,
   getHomeConfig, getAboutConfig, getProductsConfig, getCasesConfig, getSeriesConfig, getServiceConfig,
+  listMyCards, getCard, createCard, updateCard, deleteCard,
+  listContacts, saveContact, isCardSaved, deleteContact,
   HOME_DEFAULT, ABOUT_DEFAULT, PRODUCTS_DEFAULT, CASES_DEFAULT, SERIES_DEFAULT, SERVICE_DEFAULT
 };
 

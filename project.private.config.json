@@ -17,5 +17,25 @@
     "checkInvalidKey": true,
     "ignoreDevUnusedFiles": true,
     "bigPackageSizeSupport": false
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "分享名片1",
+          "pathName": "pages/card/card-detail/index",
+          "query": "id=2665ac426a19586a0005fda51f40d23f",
+          "scene": null,
+          "launchMode": "default"
+        },
+        {
+          "name": "分享名片",
+          "pathName": "pages/card/card-detail/index",
+          "query": "id=2665ac426a1944df00028c4a54d480e6",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
   }
 }

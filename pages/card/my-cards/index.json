@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "login-mask": "/components/login-mask/index"
+  },
+  "navigationBarTitleText": "我的名片"
+}

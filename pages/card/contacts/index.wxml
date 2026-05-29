@@ -1,0 +1,37 @@
+<view class="ct">
+  <view wx:if="{{loading}}" class="empty">加载中...</view>
+
+  <block wx:elif="{{authed}}">
+    <view wx:if="{{!contacts.length}}" class="empty-wrap">
+      <view class="empty-ic">📒</view>
+      <view class="empty-title">通讯录为空</view>
+      <view class="empty-sub">保存他人名片后将在这里显示</view>
+    </view>
+
+    <view wx:else class="list">
+      <view wx:for="{{contacts}}" wx:key="_id" class="card-item"
+            data-card-id="{{item.cardId}}" data-contact-id="{{item._id}}"
+            data-remark="{{item.remark}}" bindtap="onCardTap">
+        <view class="ci-left">
+          <image wx:if="{{item.snapshot.avatarUrl}}" src="{{item.snapshot.avatarUrl}}"
+                 class="ci-avatar" mode="aspectFill"/>
+          <view wx:else class="ci-avatar ci-avatar-text">
+            {{item.snapshot.name ? item.snapshot.name.substring(0,1) : '名'}}
+          </view>
+        </view>
+        <view class="ci-body">
+          <view class="ci-name">
+            {{item.snapshot.name}}
+            <text class="ci-title">{{item.snapshot.title}}</text>
+          </view>
+          <view class="ci-phone">{{item.snapshot.phone}}</view>
+          <view wx:if="{{item.remark}}" class="ci-remark">📝 {{item.remark}}</view>
+        </view>
+        <view class="ci-arrow">›</view>
+      </view>
+    </view>
+  </block>
+
+  <login-mask visible="{{showLogin}}" title="登录后查看通讯录"
+              bind:success="onLoginSuccess" bind:cancel="onCancelLogin"/>
+</view>

@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "产品详情",
   "usingComponents": {
-    "section-title": "/components/section-title/index"
+    "section-title": "/components/section-title/index",
+    "login-mask": "/components/login-mask/index"
   }
 }

@@ -19,6 +19,16 @@
       </view>
     </view>
 
+    <view class="group">
+      <view class="g-title">名片夹</view>
+      <view class="row" bindtap="onMyCards">
+        <text class="r-ic">🪪</text><text class="r-lab">我的名片</text><text class="r-arrow">›</text>
+      </view>
+      <view class="row" bindtap="onContacts">
+        <text class="r-ic">📒</text><text class="r-lab">通讯录</text><text class="r-arrow">›</text>
+      </view>
+    </view>
+
     <view wx:if="{{isAdmin}}" class="group">
       <view class="g-title">管理员中心</view>
       <view class="row" bindtap="onAdminContent">
@@ -31,7 +41,10 @@
         <text class="r-ic">🏗️</text><text class="r-lab">工程作品管理</text><text class="r-arrow">›</text>
       </view>
       <view class="row" bindtap="onAdminInquiry">
-        <text class="r-ic">📨</text><text class="r-lab">询价管理</text><text class="r-arrow">›</text>
+        <text class="r-ic">📨</text>
+        <text class="r-lab">询价管理</text>
+        <view wx:if="{{pendingInquiry > 0}}" class="r-badge">{{pendingInquiry}}</view>
+        <text class="r-arrow">›</text>
       </view>
     </view>
 

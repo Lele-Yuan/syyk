@@ -21,7 +21,11 @@
     "pages/admin/products-hero-edit/index",
     "pages/admin/cases-hero-edit/index",
     "pages/admin/series-edit/index",
-    "pages/admin/service-edit/index"
+    "pages/admin/service-edit/index",
+    "pages/card/my-cards/index",
+    "pages/card/card-edit/index",
+    "pages/card/card-detail/index",
+    "pages/card/contacts/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -73,5 +77,5 @@
   "permission": {
     "scope.userLocation": { "desc": "用于查看办公地址在地图中的位置" }
   },
-  "requiredPrivateInfos": ["chooseLocation", "getLocation"]
+  "requiredPrivateInfos": ["chooseLocation"]
 }

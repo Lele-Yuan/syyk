@@ -24,10 +24,7 @@
 
     <section-title title="企业资质"/>
     <view class="card qua">
-      <view class="q-i">✓ 建筑装饰装修工程专业承包二级</view>
-      <view class="q-i">✓ ISO 9001 质量管理体系认证</view>
-      <view class="q-i">✓ 国家高新技术企业</view>
-      <view class="q-i">✓ AAA 级信用企业</view>
+      <view wx:for="{{qualifications}}" wx:key="index" class="q-i">✓ {{item}}</view>
     </view>
   </view>
 </view>

@@ -1,0 +1,123 @@
+<view class="edit">
+
+  <!-- 基本信息 -->
+  <view class="section">
+    <view class="sec-title">基本信息</view>
+
+    <!-- 头像 -->
+    <view class="avatar-row">
+      <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+        <image wx:if="{{form.avatarUrl}}" src="{{form.avatarUrl}}" class="av-img" mode="aspectFill"/>
+        <view wx:else class="av-placeholder">
+          <text class="av-ic">👤</text>
+        </view>
+        <view class="av-edit-badge">✏️</view>
+      </button>
+      <view class="avatar-hint">
+        <view class="ah-title">名片头像</view>
+        <view class="ah-sub">点击更换头像{{uploading ? '（上传中...）' : ''}}</view>
+      </view>
+    </view>
+
+    <input class="ipt" placeholder="姓名（必填）" value="{{form.name}}"
+           data-k="name" bindinput="onInput" maxlength="20"/>
+    <input class="ipt" placeholder="职位（必填，如 销售总监）" value="{{form.title}}"
+           data-k="title" bindinput="onInput" maxlength="30"/>
+    <input class="ipt" placeholder="手机号（必填）" value="{{form.phone}}"
+           data-k="phone" bindinput="onInput" type="number" maxlength="11"/>
+    <input class="ipt" placeholder="邮箱" value="{{form.email}}"
+           data-k="email" bindinput="onInput" maxlength="60"/>
+  </view>
+
+  <!-- 专长标签 -->
+  <view class="section">
+    <view class="sec-title">专长标签（最多 2 个）</view>
+    <input class="ipt" placeholder="专长 1（如 双玻系统专家）" value="{{form.specialty0}}"
+           data-k="specialty0" bindinput="onInput" maxlength="20"/>
+    <input class="ipt last" placeholder="专长 2（如 空间规划顾问）" value="{{form.specialty1}}"
+           data-k="specialty1" bindinput="onInput" maxlength="20"/>
+  </view>
+
+  <!-- 主营业务 -->
+  <view class="section">
+    <view class="sec-title">主营业务</view>
+    <view class="sec-sub">选择预设</view>
+    <view class="area-grid">
+      <view wx:for="{{areaPresets}}" wx:key="index"
+            class="area-tag {{selectedPresets[index] ? 'area-on' : ''}}"
+            data-i="{{index}}" bindtap="onTogglePreset">
+        {{item}}
+      </view>
+    </view>
+    <view class="sec-sub mt">自定义</view>
+    <view wx:if="{{customAreas.length}}" class="custom-tags">
+      <view wx:for="{{customAreas}}" wx:key="index" class="custom-tag">
+        <text class="ct-name">{{item}}</text>
+        <text class="ct-rm" data-i="{{index}}" catchtap="onRemoveCustomArea">×</text>
+      </view>
+    </view>
+    <view class="custom-input-row">
+      <input class="ipt custom-ipt" placeholder="输入自定义业务" value="{{customAreaInput}}"
+             bindinput="onCustomAreaInput" maxlength="20"/>
+      <view class="add-tag-btn" bindtap="onAddCustomArea">＋ 添加</view>
+    </view>
+  </view>
+
+  <!-- 办公地址 -->
+  <view class="section">
+    <view class="sec-title">办公地址（{{offices.length}}）</view>
+    <view wx:for="{{offices}}" wx:key="index" class="office-row">
+      <view class="o-head">
+        <text class="o-idx">#{{index + 1}}</text>
+        <view class="o-rm" data-i="{{index}}" bindtap="onRemoveOffice">删除</view>
+      </view>
+      <input class="ipt" placeholder="地址名称（如 沈阳总部）"
+             value="{{item.name}}" data-i="{{index}}" data-k="name"
+             bindinput="onOfficeInput" maxlength="30"/>
+      <textarea class="ipt ta" placeholder="详细地址"
+                value="{{item.address}}" data-i="{{index}}" data-k="address"
+                bindinput="onOfficeInput" maxlength="120" auto-height/>
+      <view class="loc-row">
+        <view class="loc-btn" data-i="{{index}}" bindtap="onPickOfficeLocation">
+          📍 {{(item.latitude !== null && item.latitude !== undefined) ? '更新坐标' : '选择地图位置'}}
+        </view>
+        <view wx:if="{{item.latitude !== null && item.latitude !== undefined}}" class="loc-ok">已设置</view>
+      </view>
+    </view>
+    <view class="add-btn" bindtap="onAddOffice">＋ 新增办公地址</view>
+  </view>
+
+  <!-- 专业与品质 -->
+  <view class="section">
+    <view class="sec-title">专业与品质（{{achievements.length}}）</view>
+    <view wx:for="{{achievements}}" wx:key="index" class="ach-row">
+      <view class="o-head">
+        <text class="o-idx">#{{index + 1}}</text>
+        <view class="o-rm" data-i="{{index}}" bindtap="onRemoveAchievement">删除</view>
+      </view>
+      <input class="ipt" placeholder="标题（如 15+）"
+             value="{{item.numTitle}}" data-i="{{index}}" data-k="numTitle"
+             bindinput="onAchievementInput" maxlength="20"/>
+      <input class="ipt" placeholder="副标题（如 YEARS EXPERIENCE）"
+             value="{{item.subtitle}}" data-i="{{index}}" data-k="subtitle"
+             bindinput="onAchievementInput" maxlength="40"/>
+      <input class="ipt" placeholder="描述（如 深耕工业隔墙领域...）"
+             value="{{item.desc}}" data-i="{{index}}" data-k="desc"
+             bindinput="onAchievementInput" maxlength="80"/>
+    </view>
+    <view class="add-btn" bindtap="onAddAchievement">＋ 新增品质项</view>
+  </view>
+
+  <!-- 私密备注 -->
+  <view class="section">
+    <view class="sec-title">私密备注（仅自己可见）</view>
+    <textarea class="ipt ta last" placeholder="添加备注，仅自己可见..." value="{{form.remark}}"
+              data-k="remark" bindinput="onInput" maxlength="200" auto-height/>
+  </view>
+
+  <view class="actions">
+    <view class="btn-save {{submitting ? 'disabled' : ''}}" bindtap="onSave">
+      {{submitting ? '保存中...' : '保存名片'}}
+    </view>
+  </view>
+</view>

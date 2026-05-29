@@ -5,7 +5,8 @@ Page({
   data: {
     form: {
       intro: ABOUT_DEFAULT.intro,
-      offices: ABOUT_DEFAULT.offices.slice()
+      offices: ABOUT_DEFAULT.offices.slice(),
+      qualifications: ABOUT_DEFAULT.qualifications.slice()
     },
     submitting: false
   },
@@ -19,7 +20,8 @@ Page({
           intro: cfg.intro || '',
           offices: (cfg.offices || []).map(function (o) {
             return { city: o.city || '', addr: o.addr || '', phone: o.phone || '' };
-          })
+          }),
+          qualifications: (cfg.qualifications || []).slice()
         }
       });
     } catch (e) {}
@@ -73,6 +75,23 @@ Page({
       }
     });
   },
+  onQuaInput(e) {
+    const i = e.currentTarget.dataset.i;
+    const list = this.data.form.qualifications.slice();
+    list[i] = e.detail.value;
+    this.setData({ 'form.qualifications': list });
+  },
+  onAddQua() {
+    const list = this.data.form.qualifications.slice();
+    list.push('');
+    this.setData({ 'form.qualifications': list });
+  },
+  onRemoveQua(e) {
+    const i = e.currentTarget.dataset.i;
+    const list = this.data.form.qualifications.slice();
+    list.splice(i, 1);
+    this.setData({ 'form.qualifications': list });
+  },
   async onSave() {
     if (this.data.submitting) return;
     const f = this.data.form;
@@ -95,9 +114,13 @@ Page({
         return wx.showToast({ title: '城市与地址必填', icon: 'none' });
       }
     }
+    const qualifications = (f.qualifications || []).map(function (q) {
+      return (q || '').trim();
+    }).filter(function (q) { return q; });
     const data = {
       intro: (f.intro || '').trim() || ABOUT_DEFAULT.intro,
-      offices: offices
+      offices: offices,
+      qualifications: qualifications.length ? qualifications : ABOUT_DEFAULT.qualifications
     };
     this.setData({ submitting: true });
     try {

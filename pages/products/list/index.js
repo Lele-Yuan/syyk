@@ -5,15 +5,13 @@ Page({
     products: [],
     loading: true,
     showFilter: false,
-    filters: { material: '', surface: '', fireRating: '' },
-    materialOpts: ['', '工业铝合金', '冷轧钢板', '定制系列'],
-    fireOpts: ['', 'A级', 'B1级', 'B2级'],
-    surfaceOpts: ['', '阳极氧化', '粉末喷涂', '木纹饰面'],
+    keyword: '',
     heroCover: PRODUCTS_DEFAULT.heroCover,
     heroFallback: '/images/default-cover.png',
     heroTitle: PRODUCTS_DEFAULT.title,
     heroSubtitle: PRODUCTS_DEFAULT.subtitle
   },
+  _allProducts: [],
   async onShow() {
     this.loadHero();
     await this.loadList();
@@ -34,26 +32,53 @@ Page({
   async loadList() {
     this.setData({ loading: true });
     try {
-      const products = await listProducts(this.data.filters);
-      this.setData({ products: products, loading: false });
+      const all = await listProducts();
+      this._allProducts = all || [];
+      this.applyKeyword();
+      this.setData({ loading: false });
     } catch (e) {
       this.setData({ loading: false });
     }
   },
-  toggleFilter() { this.setData({ showFilter: !this.data.showFilter }); },
-  onFilter(e) {
-    const k = e.currentTarget.dataset.k;
-    const v = e.detail.value;
-    const key = 'filters.' + k;
-    const val = this.data[k + 'Opts'] ? this.data[k + 'Opts'][v] : v;
-    const patch = {};
-    patch[key] = val;
-    this.setData(patch);
+  applyKeyword() {
+    var kw = (this.data.keyword || '').trim().toLowerCase();
+    if (!kw) {
+      this.setData({ products: this._allProducts });
+      return;
+    }
+    var result = [];
+    for (var i = 0; i < this._allProducts.length; i++) {
+      var p = this._allProducts[i];
+      // 拼接所有文本字段
+      var text = [
+        p.title, p.series, p.badge,
+        p.material, p.fireRating, p.surface,
+        p.description
+      ].join(' ').toLowerCase();
+      // features 卖点
+      var features = p.features || [];
+      for (var j = 0; j < features.length; j++) {
+        text += ' ' + (features[j].title || '') + ' ' + (features[j].desc || '');
+      }
+      if (text.indexOf(kw) >= 0) {
+        result.push(p);
+      }
+    }
+    this.setData({ products: result });
   },
-  onApply() { this.setData({ showFilter: false }); this.loadList(); },
+  noop() {},
+  toggleFilter() { this.setData({ showFilter: !this.data.showFilter }); },
+  onKeywordInput(e) {
+    this.setData({ keyword: e.detail.value });
+    this.applyKeyword();
+  },
+  onApply() {
+    this.applyKeyword();
+    this.setData({ showFilter: false });
+  },
   onReset() {
-    this.setData({ filters: { material: '', surface: '', fireRating: '' } });
-    this.loadList();
+    this.setData({ keyword: '', showFilter: false });
+    this.setData({ products: this._allProducts });
   },
   onCardTap(e) {
     wx.navigateTo({ url: '/pages/products/detail/index?id=' + e.detail.id });

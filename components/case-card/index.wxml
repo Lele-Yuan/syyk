@@ -13,12 +13,12 @@
   <view class="body">
     <view class="row">
       <view class="info">
-        <view class="loc">{{item.location || '沈阳'}}</view>
+        <view class="loc">{{item.location}}</view>
         <view class="title">{{item.title}}</view>
       </view>
-      <view class="area">
+      <view class="area" wx:if="{{item.area}}">
         <view class="lab">AREA</view>
-        <view class="val">{{item.area || '—'}}㎡</view>
+        <view class="val">{{item.area}}㎡</view>
       </view>
     </view>
     <view wx:if="{{item.tags && item.tags.length}}" class="tags">

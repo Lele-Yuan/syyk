@@ -1,0 +1,30 @@
+.ct { background: #F1F4F6; min-height: 100vh; padding: 24rpx 32rpx 80rpx; }
+.empty { padding: 120rpx 32rpx; text-align: center; color: #67717E; }
+.empty-wrap { display: flex; flex-direction: column; align-items: center; padding-top: 120rpx; }
+.empty-ic { font-size: 100rpx; margin-bottom: 24rpx; }
+.empty-title { font-size: 36rpx; font-weight: 600; color: #002045; margin-bottom: 12rpx; }
+.empty-sub { font-size: 28rpx; color: #67717E; text-align: center; }
+
+.list { display: flex; flex-direction: column; gap: 20rpx; }
+.card-item {
+  background: #fff; border-radius: 20rpx;
+  padding: 24rpx 28rpx;
+  display: flex; align-items: center; gap: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04);
+}
+.ci-avatar {
+  width: 88rpx; height: 88rpx; border-radius: 50%;
+  background: linear-gradient(135deg, #002045, #1A365D);
+  flex-shrink: 0;
+}
+.ci-avatar-text {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40rpx; font-weight: 700; color: #fff;
+}
+.ci-body { flex: 1; min-width: 0; }
+.ci-name { font-size: 32rpx; font-weight: 600; color: #002045; margin-bottom: 4rpx; }
+.ci-title { font-size: 24rpx; color: #43474E; margin-bottom: 4rpx; }
+.ci-sub { color: #74777F; }
+.ci-phone { font-size: 26rpx; color: #74777F; }
+.ci-remark { font-size: 24rpx; color: #A63B00; margin-top: 6rpx; }
+.ci-arrow { color: #C4C6CF; font-size: 40rpx; }

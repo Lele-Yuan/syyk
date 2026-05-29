@@ -1,0 +1,46 @@
+<view class="mc">
+  <view wx:if="{{loading}}" class="empty">加载中...</view>
+
+  <block wx:elif="{{authed}}">
+    <view wx:if="{{!cards.length}}" class="empty-wrap">
+      <view class="empty-ic">🪪</view>
+      <view class="empty-title">还没有名片</view>
+      <view class="empty-sub">创建你的第一张数字名片，一键分享给客户</view>
+      <view class="create-btn" bindtap="onCreateCard">＋ 创建名片</view>
+    </view>
+
+    <view wx:else class="list">
+      <view wx:for="{{cards}}" wx:key="_id" class="swipe-wrap"
+            data-id="{{item._id}}"
+            bindtouchstart="onTouchStart" bindtouchend="onTouchEnd">
+
+        <!-- 操作按钮（左划后露出） -->
+        <view class="swipe-actions">
+          <view class="sa-edit" data-id="{{item._id}}" catchtap="onEditCard">编辑</view>
+          <view class="sa-delete" data-id="{{item._id}}" catchtap="onDeleteCard">删除</view>
+        </view>
+
+        <!-- 名片内容 -->
+        <view class="card-item {{swipeOpenId === item._id ? 'swiped' : ''}}"
+              data-id="{{item._id}}" bindtap="onCardTap">
+          <view class="ci-left">
+            <image wx:if="{{item.avatarUrl}}" src="{{item.avatarUrl}}" class="ci-avatar" mode="aspectFill"/>
+            <view wx:else class="ci-avatar ci-avatar-text">{{item.name ? item.name.substring(0,1) : '名'}}</view>
+          </view>
+          <view class="ci-body">
+            <view class="ci-name">{{item.name}}<text wx:if="{{item.title}}" class="ci-title"> · {{item.title}}</text></view>
+            <view class="ci-phone">{{item.phone}}</view>
+            <view wx:if="{{item.remark}}" class="ci-remark">📝 {{item.remark}}</view>
+          </view>
+          <view class="ci-arrow">›</view>
+        </view>
+
+      </view>
+    </view>
+
+    <view wx:if="{{cards.length}}" class="fab" bindtap="onCreateCard">＋</view>
+  </block>
+
+  <login-mask visible="{{showLogin}}" title="登录后查看名片"
+              bind:success="onLoginSuccess" bind:cancel="onCancelLogin"/>
+</view>

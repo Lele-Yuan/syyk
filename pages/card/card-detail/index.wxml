@@ -1,0 +1,125 @@
+<view class="detail">
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+  <block wx:elif="{{card}}">
+
+    <!-- Hero -->
+    <view class="hero">
+      <view class="h-content">
+        <view class="avatar-wrap">
+          <image wx:if="{{card.avatarUrl}}" src="{{card.avatarUrl}}" class="h-avatar" mode="aspectFill"/>
+          <view wx:else class="h-avatar h-avatar-text">{{card.name ? card.name.substring(0,1) : '名'}}</view>
+        </view>
+        <view class="h-name">
+          {{card.name}} <text class="h-title-zh">{{card.title}}</text>
+        </view>
+        <view wx:if="{{card.specialties && card.specialties.length}}" class="h-tags">
+          <view wx:for="{{card.specialties}}" wx:key="index" class="h-tag">{{item}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- Body card -->
+    <view class="body-card">
+
+      <!-- 主营业务 -->
+      <view wx:if="{{card.businessAreas && card.businessAreas.length}}" class="bc-section">
+        <view class="sec-label">MAIN BUSINESS AREAS / 主营业务</view>
+        <view class="areas-grid">
+          <view wx:for="{{card.businessAreas}}" wx:key="index" class="area-item">
+            <text class="area-ic">{{areaIcons[index] || '🔹'}}</text>
+            <text class="area-name">{{item}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 联系方式 -->
+      <view class="bc-section">
+        <view class="sec-label">CONTACT INFO / 联系方式</view>
+        <view wx:if="{{card.phone}}" class="ci-row" bindtap="onCall">
+          <view class="ci-icon ci-blue">📞</view>
+          <view class="ci-body">
+            <view class="ci-label">MOBILE PHONE</view>
+            <view class="ci-val {{!authed ? 'ci-locked' : ''}}">
+              {{authed ? card.phone : '登录后可查看电话'}}
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{card.email}}" class="ci-row">
+          <view class="ci-icon ci-blue">✉️</view>
+          <view class="ci-body">
+            <view class="ci-label">EMAIL ADDRESS</view>
+            <view class="ci-val">{{card.email}}</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 办公地址（多个） -->
+      <view wx:if="{{card.offices && card.offices.length}}" class="bc-section">
+        <view class="sec-label">OFFICE LOCATION / 办公地址</view>
+        <view wx:for="{{card.offices}}" wx:key="index" class="ci-row"
+              data-i="{{index}}" bindtap="onNavOffice">
+          <view class="ci-icon ci-orange">📍</view>
+          <view class="ci-body">
+            <view class="ci-label">{{item.name || 'OFFICE'}}</view>
+            <view class="ci-val">{{item.address}}</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 创建者私密备注 -->
+      <!-- <view wx:if="{{isOwner && ownerRemark}}" class="bc-section remark-section">
+        <view class="sec-label">私密备注（仅自己可见）</view>
+        <view class="remark-text">{{ownerRemark}}</view>
+      </view> -->
+
+      <!-- 操作按钮 -->
+      <view class="actions">
+        <view wx:if="{{!isOwner}}" class="btn-primary {{saved ? 'btn-saved' : ''}}" bindtap="onSave">
+          <text class="btn-ic">{{saved ? '✓' : '＋'}}</text>
+          <text>{{saved ? '已保存' : (authed ? '保存到通讯录' : '登录后保存至通讯录')}}</text>
+        </view>
+        <view wx:if="{{isOwner}}" class="btn-secondary" bindtap="onEdit">
+          <text class="btn-ic">✏️</text>
+          <text>编辑名片</text>
+        </view>
+        <button class="btn-outline" open-type="share">
+          <text class="btn-ic">↗</text>
+          <text>分享名片</text>
+        </button>
+      </view>
+
+    </view>
+
+    <!-- 专业与品质（动态） -->
+    <view wx:if="{{card.achievements && card.achievements.length}}" class="stats-wrap">
+      <view class="stats-head">
+        <text class="stats-ic">🛡️</text>
+        <text class="stats-title">专业与品质</text>
+      </view>
+      <view class="stats-row">
+        <view wx:for="{{card.achievements}}" wx:key="index" class="stat-card">
+          <view class="stat-num">{{item.numTitle}}</view>
+          <view class="stat-unit">{{item.subtitle}}</view>
+          <view wx:if="{{item.desc}}" class="stat-desc">{{item.desc}}</view>
+        </view>
+      </view>
+    </view>
+
+  </block>
+
+  <!-- 备注弹窗 -->
+  <view wx:if="{{showRemark}}" class="mask" catchtap="onCancelSave"></view>
+  <view wx:if="{{showRemark}}" class="remark-sheet">
+    <view class="rs-title">添加备注（可选，仅自己可见）</view>
+    <textarea class="rs-input" placeholder="输入备注..." value="{{remarkInput}}"
+              bindinput="onRemarkInput" maxlength="200" auto-height/>
+    <view class="rs-actions">
+      <view class="rs-btn rs-cancel" bindtap="onCancelSave">取消</view>
+      <view class="rs-btn rs-confirm" bindtap="onConfirmSave">保存名片</view>
+    </view>
+  </view>
+
+  <!-- 登录 -->
+  <login-mask visible="{{showLogin}}" title="登录后保存名片至通讯录"
+              bind:success="onLoginSuccess" bind:cancel="onCancelLogin"/>
+</view>
