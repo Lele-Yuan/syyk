@@ -87,6 +87,9 @@ Page({
     if (!phone) return;
     wx.makePhoneCall({ phoneNumber: phone, fail: function () {} });
   },
-  onCallSy() { wx.makePhoneCall({ phoneNumber: '02488886666', fail() {} }); }
+  onCallSy() { wx.makePhoneCall({ phoneNumber: '02488886666', fail() {} }); },
+  onShareAppMessage() {
+    return { title: '沈阳银科隔墙 - 专业隔墙系统解决方案', path: '/pages/index/index' };
+  }
 });
 

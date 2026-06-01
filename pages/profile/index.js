@@ -53,5 +53,8 @@ Page({
         }
       }
     });
+  },
+  onShareAppMessage() {
+    return { title: '沈阳银科隔墙 - 专业隔墙系统解决方案', path: '/pages/index/index' };
   }
 });

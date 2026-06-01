@@ -114,5 +114,8 @@ Page({
   },
   onItemTap(e) {
     wx.navigateTo({ url: '/pages/inquiry/detail/index?id=' + e.currentTarget.dataset.id });
+  },
+  onShareAppMessage() {
+    return { title: '沈阳银科隔墙 - 在线询价', path: '/pages/inquiry/index/index' };
   }
 });

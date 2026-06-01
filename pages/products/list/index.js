@@ -88,5 +88,8 @@ Page({
   },
   onScrollTop() {
     wx.pageScrollTo({ scrollTop: 0, duration: 300 });
+  },
+  onShareAppMessage() {
+    return { title: '沈阳银科隔墙 - 产品库房', path: '/pages/products/list/index' };
   }
 });
