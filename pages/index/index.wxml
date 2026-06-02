@@ -52,7 +52,7 @@
     <view class="brand-card">
       <view class="bc-title">{{homeSubtitle}}</view>
       <view class="bc-sub">{{homeSlogan}}</view>
-      <view class="bc-btn" bindtap="onFab">立即获取报价方案</view>
+      <view class="bc-btn" bindtap="onGoInquiry">立即获取报价方案</view>
     </view>
   </view>
 
@@ -64,5 +64,5 @@
     </view>
   </view>
 
-  <floating-btn icon="{{fabOpen ? '✕' : '💬'}}" bottom="{{200}}" bindtap="onFab"/>
+  <floating-btn icon="{{fabOpen ? '✕' : ''}}" image="{{fabOpen ? '' : '/images/service.png'}}" bottom="{{200}}" bindtap="onFab"/>
 </view>

@@ -1,7 +1,14 @@
 <view class="detail">
-  <view wx:if="{{loading}}" class="loading">加载中...</view>
+  <view wx:if="{{snapshotMode}}" class="snapshot-tip">
+    <image wx:if="{{snapshot.cover}}" src="{{snapshot.cover}}" mode="aspectFill" class="snap-cover"/>
+    <view class="snap-name">
+      {{snapshot.name}}
+      <text wx:if="{{snapshot.title}}" class="snap-sub">{{snapshot.title}}</text>
+    </view>
+    <view class="snap-desc">完整名片详情请点击下方「前往小程序」查看</view>
+  </view>
+  <view wx:elif="{{loading}}" class="loading">加载中...</view>
   <block wx:elif="{{card}}">
-
     <!-- Hero -->
     <view class="hero">
       <view class="h-content">

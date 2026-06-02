@@ -1,3 +1,4 @@
 <view class="fab" style="bottom: {{bottom}}rpx" catchtap="onTap">
-  <text class="ic">{{icon}}</text>
+  <image wx:if="{{image}}" src="{{image}}" class="ic-img" mode="aspectFit"/>
+  <text wx:else class="ic">{{icon}}</text>
 </view>

@@ -110,22 +110,48 @@ async function getServiceConfig() {
   return { agents: list };
 }
 
+async function publicCall(action, params) {
+  const r = await wx.cloud.callFunction({ name: 'publicQuery', data: Object.assign({ action: action }, params || {}) });
+  const result = r && r.result;
+  if (!result || result.code !== 0) {
+    throw new Error((result && result.msg) || 'publicQuery failed');
+  }
+  return result.data;
+}
+
 async function listProducts() {
-  const r = await db().collection('products').orderBy('createdAt', 'desc').limit(50).get();
-  return r.data;
+  try {
+    const r = await db().collection('products').orderBy('createdAt', 'desc').limit(50).get();
+    return r.data;
+  } catch (e) {
+    // 朋友圈单页模式等未登录场景下数据库直连会被拒，回退到云函数
+    return await publicCall('listProducts');
+  }
 }
 async function getProduct(id) {
-  const r = await db().collection('products').doc(id).get();
-  return r.data;
+  try {
+    const r = await db().collection('products').doc(id).get();
+    return r.data;
+  } catch (e) {
+    return await publicCall('getProduct', { id: id });
+  }
 }
 async function listCases(category) {
   const where = (category && category !== 'all') ? { category } : {};
-  const r = await db().collection('cases').where(where).orderBy('createdAt', 'desc').limit(50).get();
-  return r.data;
+  try {
+    const r = await db().collection('cases').where(where).orderBy('createdAt', 'desc').limit(50).get();
+    return r.data;
+  } catch (e) {
+    return await publicCall('listCases', { category: category });
+  }
 }
 async function getCase(id) {
-  const r = await db().collection('cases').doc(id).get();
-  return r.data;
+  try {
+    const r = await db().collection('cases').doc(id).get();
+    return r.data;
+  } catch (e) {
+    return await publicCall('getCase', { id: id });
+  }
 }
 async function submitInquiry(payload) {
   return db().collection('inquiries').add({
@@ -155,8 +181,12 @@ async function listMyCards() {
   return r.data;
 }
 async function getCard(id) {
-  const r = await db().collection('businessCards').doc(id).get();
-  return r.data;
+  try {
+    const r = await db().collection('businessCards').doc(id).get();
+    return r.data;
+  } catch (e) {
+    return await publicCall('getCard', { id: id });
+  }
 }
 async function createCard(data) {
   return db().collection('businessCards').add({

@@ -1,4 +1,9 @@
-<view class="prd-detail" wx:if="{{product}}">
+<view class="snapshot-tip" wx:if="{{snapshotMode}}">
+  <image wx:if="{{snapshot.cover}}" src="{{snapshot.cover}}" mode="aspectFill" class="snap-cover"/>
+  <view class="snap-title">{{snapshot.title}}</view>
+  <view class="snap-desc">完整产品详情请点击下方「前往小程序」查看</view>
+</view>
+<view class="prd-detail" wx:elif="{{product}}">
   <!-- 头图轮播 -->
   <view class="hero">
     <swiper class="sw" autoplay circular indicator-dots="{{false}}" bindchange="onSwiperChange">
@@ -9,7 +14,7 @@
     <view wx:if="{{product.badge}}" class="h-tag">{{product.badge}}</view>
     <view class="h-dots">
       <view wx:for="{{product.gallery && product.gallery.length ? product.gallery : [1]}}" wx:key="*this"
-            class="d {{galleryIdx === index ? 'on' : ''}}"></view>
+            class="d {{imagesIdx === index ? 'on' : ''}}"></view>
     </view>
   </view>
 
@@ -20,7 +25,7 @@
 
     <!-- 三大卖点 -->
     <view wx:if="{{product.features && product.features.length}}" class="features">
-      <view wx:for="{{product.features}}" wx:key="title" class="f-card">
+      <view wx:for="{{product.features}}" wx:key="title" wx:if="{{item.title || item.desc}}" class="f-card">
         <view class="f-title">{{item.icon || '✦'}} {{item.title}}</view>
         <view class="f-desc">{{item.desc}}</view>
       </view>

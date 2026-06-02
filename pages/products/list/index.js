@@ -91,5 +91,8 @@ Page({
   },
   onShareAppMessage() {
     return { title: '沈阳银科隔墙 - 产品库房', path: '/pages/products/list/index' };
+  },
+  onShareTimeline() {
+    return { title: '沈阳银科隔墙 - 产品库房', query: '' };
   }
 });

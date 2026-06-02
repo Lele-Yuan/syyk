@@ -95,7 +95,7 @@
 .cs-sub { font-size: 22rpx; color: #67717E; margin-top: 4rpx; }
 
 .brand-card {
-  margin: 32rpx 0 64rpx;
+  margin: 32rpx 0 0;
   background: #002045;
   border-radius: 32rpx;
   padding: 64rpx 48rpx;

@@ -37,5 +37,5 @@
     </view>
   </view>
 
-  <floating-btn icon="⬆" bottom="{{180}}" bindtap="onScrollTop"/>
+  <floating-btn image="/images/top.png" bottom="{{180}}" bindtap="onScrollTop"/>
 </view>

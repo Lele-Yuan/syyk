@@ -22,6 +22,11 @@ Page({
   },
   async onShow() {
     const app = getApp();
+    // 外部跳转要求强制定位到「在线咨询」tab
+    if (app.globalData.forceInquirySubmitTab) {
+      this.setData({ activeTab: 'submit' });
+      app.globalData.forceInquirySubmitTab = false;
+    }
     this.loadSeries();
     if (app.globalData.userInfo) {
       this.setData({ authed: true, showLogin: false });
@@ -117,5 +122,8 @@ Page({
   },
   onShareAppMessage() {
     return { title: '沈阳银科隔墙 - 在线询价', path: '/pages/inquiry/index/index' };
+  },
+  onShareTimeline() {
+    return { title: '沈阳银科隔墙 - 在线询价', query: '' };
   }
 });

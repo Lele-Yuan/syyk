@@ -17,6 +17,12 @@ Page({
   onNavAddr(e) {
     const i = e.currentTarget.dataset.i;
     navigateToOffice(this.data.offices[i]);
+  },
+  onShareAppMessage() {
+    return { title: '沈阳银科隔墙 - 关于我们', path: '/pages/about/index' };
+  },
+  onShareTimeline() {
+    return { title: '沈阳银科隔墙 - 关于我们', query: '' };
   }
 });
 

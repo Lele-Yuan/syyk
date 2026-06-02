@@ -82,6 +82,10 @@ Page({
     }
   },
   onCloseFab() { this.setData({ fabOpen: false }); },
+  onGoInquiry() {
+    getApp().globalData.forceInquirySubmitTab = true;
+    wx.switchTab({ url: '/pages/inquiry/index/index' });
+  },
   onCallAgent(e) {
     const phone = e.currentTarget.dataset.phone;
     if (!phone) return;
@@ -90,6 +94,9 @@ Page({
   onCallSy() { wx.makePhoneCall({ phoneNumber: '02488886666', fail() {} }); },
   onShareAppMessage() {
     return { title: '沈阳银科隔墙 - 专业隔墙系统解决方案', path: '/pages/index/index' };
+  },
+  onShareTimeline() {
+    return { title: '沈阳银科隔墙 - 专业隔墙系统解决方案', query: '' };
   }
 });
 

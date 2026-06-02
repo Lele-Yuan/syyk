@@ -49,8 +49,14 @@ Page({
   onCardTap(e) {
     wx.navigateTo({ url: '/pages/cases/detail/index?id=' + e.detail.id });
   },
-  onInquiry() { wx.switchTab({ url: '/pages/inquiry/index/index' }); },
+  onInquiry() {
+    getApp().globalData.forceInquirySubmitTab = true;
+    wx.switchTab({ url: '/pages/inquiry/index/index' });
+  },
   onShareAppMessage() {
     return { title: '沈阳银科隔墙 - 工程案例', path: '/pages/cases/list/index' };
+  },
+  onShareTimeline() {
+    return { title: '沈阳银科隔墙 - 工程案例', query: '' };
   }
 });

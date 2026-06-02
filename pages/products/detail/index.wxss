@@ -1,4 +1,8 @@
 .prd-detail { background: #fff; min-height: 100vh; padding-bottom: 180rpx; }
+.snapshot-tip { padding: 60rpx 40rpx; text-align: center; background: #fff; min-height: 100vh; }
+.snapshot-tip .snap-cover { width: 100%; height: 420rpx; border-radius: 16rpx; margin-bottom: 32rpx; }
+.snapshot-tip .snap-title { font-size: 36rpx; font-weight: 600; color: #002045; margin-bottom: 16rpx; }
+.snapshot-tip .snap-desc { font-size: 26rpx; color: #888; line-height: 1.6; }
 .hero { position: relative; width: 100%; height: 700rpx; }
 .hero .sw { width: 100%; height: 100%; }
 .h-img { width: 100%; height: 100%; }

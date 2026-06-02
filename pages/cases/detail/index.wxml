@@ -1,4 +1,9 @@
-<view class="cs-detail" wx:if="{{caseInfo}}">
+<view class="snapshot-tip" wx:if="{{snapshotMode}}">
+  <image wx:if="{{snapshot.cover}}" src="{{snapshot.cover}}" mode="aspectFill" class="snap-cover"/>
+  <view class="snap-title">{{snapshot.title}}</view>
+  <view class="snap-desc">完整案例详情请点击下方「前往小程序」查看</view>
+</view>
+<view class="cs-detail" wx:elif="{{caseInfo}}">
   <!-- 顶部 Banner -->
   <view class="hero">
     <image src="{{caseInfo.cover}}" mode="aspectFill" class="h-img"/>
@@ -27,30 +32,30 @@
     </view>
 
     <!-- 项目概况 -->
-    <section-title title="项目概况"/>
+    <section-title title="项目概况" />
     <view class="card overview">
       <view wx:if="{{caseInfo.description}}" class="ov-text">{{caseInfo.description}}</view>
-      <view class="ov-row">
+      <view class="ov-row" wx:if="{{caseInfo.address}}">
         <view class="ov-ic">📍</view>
         <view class="ov-info">
           <view class="ov-lab">项目地址</view>
-          <view class="ov-val">{{caseInfo.address || '—'}}</view>
+          <view class="ov-val">{{caseInfo.address}}</view>
         </view>
       </view>
-      <view class="ov-row">
+      <view class="ov-row" wx-if="{{caseInfo.difficulty}}">
         <view class="ov-ic">⚠️</view>
         <view class="ov-info">
           <view class="ov-lab">施工难点</view>
-          <view class="ov-val">{{caseInfo.difficulty || '—'}}</view>
+          <view class="ov-val">{{caseInfo.difficulty}}</view>
         </view>
       </view>
     </view>
 
     <!-- 实景展示 -->
-    <view wx:if="{{caseInfo.gallery && caseInfo.gallery.length}}">
-      <section-title title="实景展示" extra="{{caseInfo.gallery.length}}张实拍"/>
+    <view wx:if="{{caseInfo.images && caseInfo.images.length}}">
+      <section-title title="实景展示" extra="{{caseInfo.images.length}}张实拍"/>
       <scroll-view scroll-x class="gal" enhanced show-scrollbar="{{false}}">
-        <image wx:for="{{caseInfo.gallery}}" wx:key="*this" src="{{item}}" mode="aspectFill" class="g-img"/>
+        <image wx:for="{{caseInfo.images}}" wx:key="*this" src="{{item}}" mode="aspectFill" class="g-img"/>
       </scroll-view>
     </view>
 
@@ -72,11 +77,14 @@
     <view wx:if="{{caseInfo.materials && caseInfo.materials.length}}">
       <section-title title="所用材料"/>
       <view wx:for="{{caseInfo.materials}}" wx:key="name" class="mat-card" data-id="{{item.productId}}" bindtap="onProduct">
-        <view class="mat-ic"><text>{{item.icon || '🧱'}}</text></view>
+        <view class="mat-ic {{item.cover ? 'mat-ic-img' : ''}}">
+          <image wx:if="{{item.cover}}" src="{{item.cover}}" mode="aspectFill" class="mat-cover"/>
+          <text wx:else>{{item.icon || '🧱'}}</text>
+        </view>
         <view class="mat-info">
           <view class="mat-title">{{item.name}}</view>
-          <view class="mat-desc">{{item.desc}}</view>
-          <view class="mat-link">查看产品详情 →</view>
+          <view wx:if="{{item.desc}}" class="mat-desc">{{item.desc}}</view>
+          <view wx:if="{{item.productId}}" class="mat-link">查看产品详情 →</view>
         </view>
       </view>
     </view>
@@ -98,7 +106,7 @@
   </view>
 
   <view class="bottom-cta">
-    <view class="cta-btn" bindtap="onInquiry">📞 获取同款方案报价</view>
+    <view class="cta-btn" bindtap="onInquiry">获取同款方案报价</view>
   </view>
 </view>
 <view wx:else class="empty-state">加载中…</view>
